@@ -1,0 +1,16 @@
+.variable-type-property-field {
+    flex-direction: row;
+}
+
+.unity-label {
+    -unity-text-align: middle-left;
+}
+
+.variable-type-property-field__type-name {
+    flex: 1;
+    -unity-text-align: middle-right;
+}
+
+.unity-button {
+    margin-right: 0;
+}

@@ -1,0 +1,172 @@
+.ge-wire,
+.ge-transition {
+    position: absolute;
+    --layer:-10;
+    border-width: 0;
+    padding: 0;
+}
+
+.ge-wire__wire-control {
+    position: absolute;
+    --wire-color: var(--graph-color-wire);
+    --wire-width: 4;
+}
+
+.ge-wire:checked > .ge-wire__wire-control,
+.ge-transition:checked > .ge-transition__transition-control {
+    --wire-color: var(--graph-color-wire-selected);
+}
+
+/***
+ * Wire specific.
+ */
+
+.ge-wire:hover .ge-wire__wire-control {
+    --wire-width: 6;
+    margin-top: 1px;
+}
+
+.ge-wire--ghost .ge-wire__wire-bubble {
+    opacity: .5;
+}
+
+/***
+ * Transition specific.
+ */
+
+.ge-transition__transition-control {
+    --wire-color: var(--graph-color-wire);
+    --wire-width: 2;
+    --wire-padding: 10;
+}
+
+.ge-transition--ghost > .ge-transition__transition-control,
+.ge-transition--ghost:hover > .ge-transition__transition-control {
+    --wire-color: var(--graph-color-wire-ghost);
+}
+
+.ge-transition:hover > .ge-transition__transition-control {
+    --wire-color: var(--graph-color-wire-selected);
+}
+
+.ge-transition:hover:checked > .ge-transition__transition-control,
+.ge-transition--connector-hover > .ge-transition__transition-control {
+    --wire-width: 3;
+}
+
+.ge-transition-arrow {
+    --wire-color: var(--graph-color-node-border);
+    --inner-line-color: rgba(0,0,0,0);
+    --wire-width: 2;
+    --inner-line-width: 0;
+    --arrow-fill-color: var(--graph-color-block-background);
+    --arrow-width: 25;
+    --arrow-triangle-length: 15;
+    --arrow-border-radius: 1;
+    position: absolute;
+    align-items: center;
+    flex: auto 0 0;
+}
+
+.ge-transition:checked .ge-transition-arrow {
+    --wire-color: var(--graph-color-wire-selected);
+    --wire-width: 2;
+}
+
+.ge-transition:hover .ge-transition-arrow {
+    --wire-color: var(--graph-color-wire-selected);
+    --wire-width: 2;
+}
+
+.ge-transition:hover:checked .ge-transition-arrow {
+    --wire-width: 3;
+}
+
+.ge-transition-arrow--short {
+    --arrow-length: 26;
+}
+
+.ge-transition-arrow--long {
+    --arrow-length: 35;
+}
+
+.ge-transition--global > .ge-transition-arrow--long,
+.ge-transition--self > .ge-transition-arrow--long,
+.ge-transition--on-enter > .ge-transition-arrow--long {
+    --arrow-length: 53;
+}
+
+.ge-transition--global > .ge-transition-arrow--short,
+.ge-transition--self > .ge-transition-arrow--short,
+.ge-transition--on-enter > .ge-transition-arrow--short {
+    --arrow-length: 39;
+}
+
+.ge-transition-arrow__transition-icon {
+    flex: auto 0 0;
+    width: 17px;
+    height: 17px;
+    margin: 4px 0;
+}
+
+.ge-transition-counter {
+    flex: auto 0 1;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ge-transition-counter__label {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--unity-colors-button-text);
+    padding: 0;
+    -unity-text-align: middle-center;
+}
+
+.ge-transition--global .ge-transition-arrow {
+    --wire-width: 1;
+    --arrow-fill-color: var(--graph-color-global-transition-arrow-fill);
+}
+
+.ge-transition--global .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-global-transition-icon);
+}
+
+.ge-transition--global:checked .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-global-transition-icon-selected);
+}
+
+.ge-transition--global .ge-transition-counter__label {
+    color: var(--graph-color-enter-state-label-color);
+}
+
+.ge-transition--self .ge-transition-arrow {
+    --wire-width: 1;
+    --arrow-fill-color: var(--graph-color-self-transition-arrow-fill);
+}
+
+.ge-transition--self .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-self-transition-icon);
+}
+
+.ge-transition--self:checked .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-self-transition-icon-selected);
+}
+
+.ge-transition--on-enter .ge-transition-arrow {
+    --wire-width: 1;
+    --arrow-fill-color: var(--graph-color-on-enter-transition-arrow-fill);
+}
+
+.ge-transition--on-enter .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-on-enter-transition-icon);
+}
+
+.ge-transition--on-enter:checked .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-on-enter-transition-icon-selected);
+}
+
+.ge-transition--on-enter .ge-transition-counter__label {
+    color: var(--graph-color-enter-state-label-color);
+}

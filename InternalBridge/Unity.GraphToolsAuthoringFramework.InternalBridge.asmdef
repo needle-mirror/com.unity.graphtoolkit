@@ -1,0 +1,60 @@
+{
+    "name": "Unity.GraphToolsAuthoringFramework.InternalBridge",
+    "rootNamespace": "Unity.GraphToolsAuthoringFramework.InternalBridge",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "Unity",
+            "expression": "5999",
+            "define": "GTK_UNITY_6000_0_OR_NEWER"
+        },
+        {
+            "name": "Unity",
+            "expression": "2023.3.0b10",
+            "define": "GTK_UNITY_2023_3_B10_OR_NEWER"
+        },
+        {
+            "name": "Unity",
+            "expression": "6000.0.0b15",
+            "define": "GTK_UNITY_6000_0_B15_OR_NEWER"
+        },
+        {
+            "name": "Unity",
+            "expression": "6000.2.0a10",
+            "define": "UGTK_UNITY_NEW_GETCACHEDFONTASSET"
+        },
+        {
+            "name": "Unity",
+            "expression": "[6000.1.0f1,6000.2.0a1)",
+            "define": "UGTK_UNITY_NEW_GETCACHEDFONTASSET"
+        },
+        {
+            "name": "Unity",
+            "expression": "[6000.0.49f1,6000.1.0a1)",
+            "define": "GTK_TEXTGENSETTINGS_REMOVED_CONSTANTS"
+        },
+        {
+            "name": "Unity",
+            "expression": "[6000.1.3f1,6000.2.0a1)",
+            "define": "GTK_TEXTGENSETTINGS_REMOVED_CONSTANTS"
+        },
+        {
+            "name": "Unity",
+            "expression": "6000.2.0a11",
+            "define": "GTK_TEXTGENSETTINGS_REMOVED_CONSTANTS"
+        },
+        {
+            "name": "Unity",
+            "expression": "6000.2.0b6",
+            "define": "GTK_NEW_MEASURETEXT_API"
+        }
+    ],
+    "noEngineReferences": false
+}

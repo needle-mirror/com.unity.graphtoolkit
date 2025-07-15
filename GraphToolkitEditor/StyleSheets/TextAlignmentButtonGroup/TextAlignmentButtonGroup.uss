@@ -1,0 +1,4 @@
+.ge-text-alignment-field .unity-button-group__button-icon     {
+    height: 16px;
+    width: 16px;
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Unity.GraphToolkit.DocCodeSamples",
+    "rootNamespace": "Unity.GraphToolkit.DocCodeSamples",
+    "references": [
+        "Unity.GraphToolkit.Editor",
+        "Unity.GraphToolkit.Common.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}

@@ -1,0 +1,7 @@
+# See https://internaldocs.unity.com/package_development/documentation/
+apiRules:
+  - exclude:
+      hasAttribute:
+        uid: System.ComponentModel.EditorBrowsableAttribute
+        ctorArguments:
+          - System.ComponentModel.EditorBrowsableState.Never

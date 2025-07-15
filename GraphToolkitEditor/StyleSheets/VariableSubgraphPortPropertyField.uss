@@ -1,0 +1,66 @@
+.variable-subgraph-ports-property-field {
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.unity-button-group {
+    flex-direction: row;
+}
+
+.variable-subgraph-ports-property-field > * {
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.variable-subgraph-ports-property-field__control {
+    margin-left: 4px;
+    margin-right: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.variable-subgraph-ports-property-field__toggle-content {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.variable-subgraph-ports-property-field--with-toggle {
+    left: 16px;
+}
+
+.variable-subgraph-ports-property-field__line {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    flex-direction: row;
+}
+
+.variable-subgraph-ports-property-field__input-output > .unity-button {
+    margin-left: 0;
+    margin-right: 0;
+    flex-grow: 1;
+}
+
+.variable-subgraph-ports-property-field__change-button--unchecked .variable-subgraph-ports-property-field__toggle-content {
+    display: none;
+}
+
+.unity-label {
+    -unity-text-align: middle-left;
+    align-self: center;
+}
+
+.unity-toggle {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.unity-toggle__input {
+    justify-content: flex-end;
+}
+
+.spacer {
+    flex-grow: 1;
+    flex-basis: 0;
+}

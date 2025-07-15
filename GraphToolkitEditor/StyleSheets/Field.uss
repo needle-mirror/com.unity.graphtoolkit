@@ -1,0 +1,185 @@
+.ge-model-property-field--connected {
+    opacity: 1.0;
+}
+
+.ge-model-property-field--connected .unity-base-text-field__input {
+    background-color: var(--graph-color-plugged-value-tint);
+}
+
+.ge-inline-value-editor .unity-color-field__input,
+.ge-model-property-field .unity-color-field__input {
+    min-width: 80px;
+}
+
+.ge-inline-value-editor .unity-enum-field__input,
+.ge-model-property-field .unity-enum-field__input {
+    min-width: 100px;
+}
+
+.ge-inline-value-editor > .unity-base-field,
+.ge-model-property-field > .unity-base-field {
+    margin: 0;
+}
+
+.ge-inline-value-editor .unity-vector4-int-field__input,
+.ge-model-property-field .unity-vector4-int-field__input,
+.ge-inline-value-editor .unity-vector4-field__input,
+.ge-model-property-field .unity-vector4-field__input {
+    width: 194px;
+}
+
+.ge-inline-value-editor .unity-vector3-int-field__input,
+.ge-model-property-field .unity-vector3-int-field__input,
+.ge-inline-value-editor .unity-vector3-field__input,
+.ge-model-property-field .unity-vector3-field__input {
+    min-width: 147px;
+}
+
+.ge-inline-value-editor .unity-vector2-int-field__input,
+.ge-model-property-field .unity-vector2-int-field__input,
+.ge-inline-value-editor .unity-vector2-field__input,
+.ge-model-property-field .unity-vector2-field__input {
+    min-width: 100px;
+}
+
+.ge-inline-value-editor .unity-rect-field,
+.ge-model-property-field .unity-rect-field,
+.ge-inline-value-editor .unity-rect-int-field,
+.ge-model-property-field .unity-rect-int-field {
+    min-width: 100px;
+}
+
+.ge-inline-value-editor .unity-bounds-field,
+.ge-model-property-field .unity-bounds-field,
+.ge-inline-value-editor .unity-bounds-int-field,
+.ge-model-property-field .unity-bounds-int-field {
+    min-width: 204px;
+}
+
+
+.ge-node__constant-editor ge-inline-value-editor .unity-bounds-field__extents-field.unity-base-field,
+.ge-model-property-field .unity-bounds-field__extents-field.unity-base-field,
+.ge-node__constant-editor ge-inline-value-editor .unity-bounds-int-field__size-field.unity-base-field,
+.ge-model-property-field .unity-bounds-int-field__size-field.unity-base-field {
+    margin-top: 2px;
+}
+
+.ge-inline-value-editor .unity-integer-field,
+.ge-model-property-field .unity-integer-field,
+.ge-inline-value-editor .unity-long-field,
+.ge-model-property-field .unity-long-field,
+.ge-inline-value-editor .unity-text-field,
+.ge-model-property-field .unity-text-field,
+.ge-inline-value-editor .unity-float-field,
+.ge-model-property-field .unity-float-field,
+.ge-inline-value-editor .unity-double-field,
+.ge-model-property-field .unity-double-field {
+    height: 19px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.ge-inline-value-editor .unity-integer-field,
+.ge-model-property-field .unity-integer-field,
+.ge-inline-value-editor .unity-long-field,
+.ge-model-property-field .unity-long-field,
+.ge-inline-value-editor .unity-text-field,
+.ge-model-property-field .unity-text-field,
+.ge-inline-value-editor .unity-float-field,
+.ge-model-property-field .unity-float-field,
+.ge-inline-value-editor .unity-double-field,
+.ge-model-property-field .unity-double-field {
+    min-width: 80px;
+}
+
+.ge-inline-value-editor .unity-text-field.unity-char-field,
+.ge-model-property-field .unity-text-field.unity-char-field {
+    min-width: 25px;
+}
+
+.ge-inline-value-editor .unity-integer-field__input,
+.ge-model-property-field .unity-integer-field__input,
+.ge-inline-value-editor .unity-long-field__input,
+.ge-model-property-field .unity-long-field__input,
+.ge-inline-value-editor .unity-text-field__input,
+.ge-model-property-field .unity-text-field__input,
+.ge-inline-value-editor .unity-double-field__input,
+.ge-model-property-field .unity-double-field__input,
+.ge-inline-value-editor .unity-float-field__input,
+.ge-model-property-field .unity-float-field__input {
+    flex-basis: 0;
+}
+
+.ge-inline-value-editor .unity-composite-field .unity-integer-field,
+.ge-model-property-field .unity-composite-field .unity-integer-field,
+.ge-inline-value-editor .unity-composite-field .unity-long-field,
+.ge-model-property-field .unity-composite-field .unity-long-field,
+.ge-inline-value-editor .unity-composite-field .unity-float-field,
+.ge-model-property-field .unity-composite-field .unity-float-field,
+.ge-inline-value-editor .unity-composite-field .unity-double-field,
+.ge-model-property-field .unity-composite-field .unity-double-field {
+    min-width: auto;
+}
+
+.ge-inline-value-editor .unity-curve-field__input,
+.ge-model-property-field .unity-curve-field__input,
+.ge-inline-value-editor .unity-gradient-field__input,
+.ge-model-property-field .unity-gradient-field__input {
+    min-width: 80px;
+}
+
+.ge-inline-value-editor .unity-object-field__input,
+.ge-model-property-field .unity-object-field__input {
+    min-width: 125px;
+}
+
+.ge-inline-value-editor .unity-bounds-field,
+.ge-model-property-field .unity-bounds-field,
+.ge-inline-value-editor .unity-bounds-int-field,
+.ge-model-property-field .unity-bounds-int-field {
+    flex-direction: row;
+}
+
+.ge-inline-value-editor .unity-bounds-field__center-field > .unity-base-field__label,
+.ge-model-property-field .unity-bounds-field__extents-field > .unity-base-field__label,
+.ge-inline-value-editor .unity-bounds-int-field__position-field > .unity-base-field__label,
+.ge-model-property-field .unity-bounds-int-field__size-field > .unity-base-field__label {
+    padding-left: 0;
+}
+.ge-inline-value-editor .unity-bounds-field__center-field > .unity-base-field__label,
+.ge-model-property-field .unity-bounds-field__extents-field > .unity-base-field__label {
+    padding-left: 0;
+    width: 42px; /* width of the longer label extents */
+}
+
+.ge-inline-value-editor .unity-bounds-int-field__position-field > .unity-base-field__label,
+.ge-model-property-field .unity-bounds-int-field__size-field > .unity-base-field__label {
+    padding-left: 0;
+    width: 45px; /* width of the longer label position */
+}
+
+.ge-inline-value-editor .unity-composite-field__field-spacer,
+.ge-model-property-field .unity-composite-field__field-spacer {
+    flex-grow: 0;
+}
+
+.ge-inline-value-editor > .unity-base-field > .unity-label,
+.ge-model-property-field > .unity-base-field > .unity-label,
+.ge-override-model-serialized-field > .unity-label {
+    min-width: 0;
+    padding-top: 0;
+    -unity-text-align: middle-left;
+    height: 21px;
+}
+
+.ge-override-model-serialized-field {
+    flex-direction: row;
+}
+
+.ge-override-model-serialized-field .unity-base-field {
+    flex-grow: 1;
+}
+
+.ge-override-model-serialized-field .unity-base-field.ge-override-model-serialized-field__override {
+    flex-grow: 0;
+}

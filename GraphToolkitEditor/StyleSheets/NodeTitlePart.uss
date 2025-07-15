@@ -1,0 +1,66 @@
+.ge-node-title-part {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ge-node-title-part__title-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.ge-node--capsule .ge-node-title-part__title-container {
+    flex-grow: 0;
+}
+
+.ge-node--capsule .ge-editable-label > .unity-label {
+    padding: 0 0 0 3px;
+}
+
+.ge-node-title-part__icon {
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    margin: 0 4px 0 6px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.ge-editable-title-part__label-container {
+    height: 52px; /* this depends on the height of the text at the minimum zoom where it is still visible*/
+    -unity-text-align: middle-left;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.ge-node--capsule .ge-node-title-part__label-container {
+    flex-grow: 0;
+    min-width: 0;
+}
+
+.ge-node-title-part__title-group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ge-node-title-part__mode-container > .unity-base-popup-field__text {
+    display: none;
+}
+
+.ge-node-title-part--small .ge-node-title-part__mode-dropdown {
+    display: none;
+}
+
+.ge-node-title-part .ge-node-title-part__button-container {
+    background-color: var(--graph-color-node-background);
+    flex-direction: row;
+    position: absolute;
+    align-items: center;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

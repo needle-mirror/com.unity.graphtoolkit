@@ -1,0 +1,15 @@
+{
+    "name": "Unity.GraphToolkit.Utility.Editor",
+    "rootNamespace": "Unity.GraphToolkit.Utility.Editor",
+    "references": [
+        "GUID:9b443c5ad3b147e29fd53a32b878ca5c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,98 @@
+.ge-transition-properties-editor {
+    border-width: 1px;
+    padding: 5px;
+    border-radius: 3px;
+    border-color: var(--unity-colors-inspector_titlebar-border);
+    background-color: var(--theme-view-background-color);
+}
+
+.ge-transition-properties-editor__header {
+    flex-direction: row;
+    align-items: center;
+    margin: -5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.ge-transition-properties-editor .ge-model-property-field {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.ge-transition-properties-editor .ge-model-property-field .unity-toggle {
+    margin-bottom: 0;
+}
+
+.ge-transition-properties-editor__header .unity-foldout__toggle > .unity-toggle__input > .unity-toggle__checkmark {
+    margin-right: 0px;
+}
+
+.ge-transition-properties-editor__drag-handle {
+    background-image: var(--unity-icons-drag-handle);
+    width: 10px;
+    height: 6px;
+}
+
+.ge-transition-properties-editor__left-header-group {
+    flex-direction: row;
+}
+
+.ge-transition-properties-editor__title-label {
+    -unity-font-style: bold;
+    flex-basis: 0;
+    flex-grow: 1;
+    align-self: center;
+}
+
+.ge-transition-properties-editor__enable-toggle {
+    margin-bottom: 1px;
+    align-self: center;
+    padding-right: 4px;
+    border-right-width: 1px;
+    border-right-color: var(--unity-theme-background-color-8);
+}
+
+.ge-transition-properties-editor__container {
+    margin-top: 10px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.ge-transition-properties-editor--collapsed .ge-transition-properties-editor__container {
+    display: none;
+}
+
+.ge-transition-properties-editor--selected {
+    border-color: #505050;
+}
+
+.ge-view--focused .ge-transition-properties-editor--selected {
+    border-color: var(--theme-input-border-focus-color);
+}
+
+.ge-transition-properties-editor__option-button:hover {
+    background-color: #6e6e6e;
+}
+
+.ge-transition-properties-editor__condition-title {
+    padding-top: 14px;
+    -unity-font-style: bold;
+}
+
+.ge-transition-properties-editor__condition-editor {
+    margin-top: 5px;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.sm-transition-property-field {
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 20px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+}

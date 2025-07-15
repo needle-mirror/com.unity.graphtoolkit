@@ -1,0 +1,29 @@
+﻿.ge-state-border {
+    flex-grow: 1;
+    border-width: 6px;
+    padding: 12px;
+    border-color: rgba(0,0,0,0);
+    border-radius: 27px;
+    margin: -12px;
+}
+
+.ge-state-border__content-container {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.ge-state-border__connector {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 8px;
+    background-color: var(--graph-color-wire);
+}
+
+.ge-state-border--connector-hidden .ge-state-border__connector {
+    display: none;
+}
+
+.ge-state-border--manipulation-mode .ge-state-border__connector {
+    background-color: var(--graph-color-wire-selected);
+}

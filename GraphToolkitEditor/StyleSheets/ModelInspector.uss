@@ -1,0 +1,60 @@
+.model-inspector-view {
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    flex: 1;
+    border-left-color: var(--graph-color-inspector-border);
+    border-left-width: 2px;
+    overflow: hidden;
+}
+
+.unity-overlay .model-inspector-view {
+    width: auto;
+    border-left-width: 0;
+}
+
+.model-inspector-view__title,
+.ge-graph-element-title-property-field {
+    flex: 0 0 auto;
+    padding: 5px;
+}
+
+.model-inspector-view__title {
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+.model-inspector-view__container {
+    flex: 1 0 0;
+}
+
+.model-inspector-view__container .unity-inspector-element {
+    padding: 0;
+}
+
+.ge-model-property-field {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.ge-model-property-field--multiline .unity-text-field {
+    flex-direction: column;
+    min-height: 100px;
+    white-space: normal;
+}
+
+.ge-model-property-field--multiline .unity-text-field .unity-label {
+    margin-bottom: 4px;
+}
+
+.ge-model-property-field--multiline .unity-text-field .unity-base-text-field__input {
+    align-self: stretch;
+}
+
+.ge-model-property-field .unity-object-field {
+    margin-left: 0;
+}
+
+.ge-model-property-field .unity-imgui-container {
+    margin-left: 0;
+}

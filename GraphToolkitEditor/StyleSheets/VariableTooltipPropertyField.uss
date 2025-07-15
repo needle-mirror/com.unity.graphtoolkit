@@ -1,0 +1,11 @@
+.variable-tooltip-property-field {
+    flex-direction: row;
+    align-items: center;
+}
+
+.variable-tooltip-property-field__field {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0;
+}
+

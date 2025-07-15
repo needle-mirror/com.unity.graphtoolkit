@@ -1,0 +1,16 @@
+{
+    "name": "Unity.CommandStateObserver",
+    "rootNamespace": "Unity.GraphToolkit.CSO",
+    "references": [
+        "GUID:9b443c5ad3b147e29fd53a32b878ca5c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

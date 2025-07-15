@@ -1,0 +1,46 @@
+        [SerializeReference]
+        <#= typeName #> m_Node;
+
+        Node IUserNodeModelImp.Node => m_Node;
+        public <#= typeName #> Node => m_Node;
+
+        Dictionary<string,INodeOption> m_NodeOptionsByName = new ();
+        Dictionary<string, INodeOption> IUserNodeModelImp.NodeOptionsByName => m_NodeOptionsByName;
+
+        public override string Title => m_Node?.GetType().Name ?? "Missing Node";
+
+        protected override void OnDefineNode(NodeDefinitionScope definitionScope)
+        {
+            ((IUserNodeModelImp)this).CustomOnDefineNode(definitionScope);
+        }
+
+        public override void OnAfterDeserialize()
+        {
+            base.OnAfterDeserialize();
+
+            m_Node?.SetImplementation(this);
+        }
+
+        public void InitCustomNode(<#= typeName #> node)
+        {
+            m_Node = node;
+            Node.SetImplementation(this);
+        }
+
+        public override void OnDuplicateNode(AbstractNodeModel sourceNode)
+        {
+            ((IUserNodeModelImp)this).CallOnEnable();
+            base.OnDuplicateNode(sourceNode);
+        }
+
+        public override void OnCreateNode()
+        {
+            ((IUserNodeModelImp)this).CallOnEnable();
+            base.OnCreateNode();
+        }
+
+        protected override PortModel CreatePort(PortDirection direction, PortOrientation orientation, string portName, PortType portType, TypeHandle dataType, string portId, PortModelOptions options, Attribute[] attributes, PortModel parentPort)
+        {
+            return new PortModelImp(this, direction, orientation, portName, portType, dataType, portId, options, attributes, parentPort);
+        }
+

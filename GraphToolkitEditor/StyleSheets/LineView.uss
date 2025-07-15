@@ -1,0 +1,8 @@
+.ge-line-view {
+    --snapping-line-color: var(--graph-color-node-hover-highlight);
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+}

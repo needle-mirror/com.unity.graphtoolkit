@@ -1,0 +1,224 @@
+.ge-condition-editor {
+    background-color: var(--unity-theme-background-color-54);
+}
+
+.ge-condition-view__drag-handle {
+    background-image: var(--unity-icons-drag-handle);
+    margin-left: 2px;
+    margin-right: 10px;
+    width: 10px;
+    height: 6px;
+}
+
+.ge-root-group-condition-view > .ge-group-condition-view__title .ge-condition-view__drag-handle {
+    display: none;
+}
+
+.ge-condition-editor > .ge-condition-view > .ge-group-condition-view__title > .ge-group-condition-view__title-container > .ge-group-condition-view__drag-handle {
+    display: none;
+}
+
+.ge-condition-editor > .ge-condition-view > .ge-group-condition-view__title > .ge-group-condition-view__title-container > .ge-group-condition-view__label {
+    padding-left: 4px;
+}
+
+.ge-condition-view {
+    border-width: 1px;
+}
+
+.ge-condition-view--single {
+    flex-direction: row;
+    align-items: center;
+    height: 28px;
+    padding-left: 1px;
+}
+
+.ge-condition-view--single:hover,
+.ge-group-condition-view__title:hover {
+    background-color: var(--theme-line-background-color-hover);
+}
+
+/*The root group is not selectable and therefore shouldn't have an hover color*/
+.ge-condition-editor > .ge-condition-view > .ge-group-condition-view__title {
+    background-color: transparent;
+}
+
+.ge-condition-view--selected,
+.ge-condition-view--selected > .ge-group-condition-view__title:hover {
+    background-color: var(--theme-line-selection-background-color);
+}
+
+
+.ge-condition-editor:focus .ge-condition-view--selected,
+.ge-condition-editor:focus .ge-condition-view--selected > .ge-group-condition-view__title:hover
+{
+    background-color: var(--theme-line-selection-background-color-focus);
+}
+
+.ge-condition-view__icon {
+    align-self: center;
+    width: 0;
+    height: 16px;
+}
+
+.ge-condition-view__container {
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 21px;
+    padding-left: 6px;
+    margin-right: 5px;
+    margin-left: 0;
+    overflow: hidden;
+}
+
+.ge-group-condition-view {
+    flex-shrink: 0;
+}
+
+.ge-condition-editor > .ge-condition-view > .ge-group-condition-view__title {
+    padding-bottom: 2px;
+}
+
+.ge-group-condition-view__title {
+    height: 26px;
+    flex-direction: row;
+    overflow: hidden;
+    border-width: 2px;
+}
+
+.ge-group-condition-view__lines-layer {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    right: 0;
+    bottom: 0;
+    color: var(--bracket-color);
+}
+
+.ge-condition-view--valid > .ge-group-condition-view__double-container > .ge-group-condition-view__lines-layer,
+.ge-condition-view--invalid > .ge-group-condition-view__double-container > .ge-group-condition-view__lines-layer,
+.ge-condition-view--not-evaluated > .ge-group-condition-view__double-container > .ge-group-condition-view__lines-layer {
+    left: 24px;
+}
+
+.ge-group-condition-view__title-container {
+    align-self: center;
+    align-items: center;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 21px;
+    margin-left: -1px;
+    margin-right: 5px;
+    border-color: transparent;
+}
+
+.ge-group-condition-view__title--hover {
+    border-color: var(--theme-list-view-drag-hover-bar-color);
+}
+
+ge-group-condition-view__label {
+    padding-left: 16px;
+}
+
+.ge-group-condition-view__label {
+    padding-left: 6px;
+}
+
+.ge-group-condition-view__double-container {
+    background-color: var(--theme-view-background-color);
+}
+
+.ge-group-condition-view__container {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.ge-condition-editor > .ge-condition-view {
+    background-color: transparent;
+}
+
+.ge-group-condition-view__condition-popup {
+    width: 55px;
+}
+
+.ge-root-group-condition-view__add-button {
+    flex-direction: row;
+}
+
+.ge-root-group-condition-view__add-button .unity-toolbar-menu__text {
+    color: rgba(0, 0, 0, 0);
+    height: 16px;
+    width: 16px;
+    background-image: var(--icon-add);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ge-group-condition-view__drag-block {
+    height: 2px;
+    position: absolute;
+    left: 24px;
+    right: 0;
+    background-color: var(--theme-list-view-drag-hover-bar-color);
+}
+
+.ge-group-condition-view__debug-label  {
+    align-self: center;
+    -unity-font-style: bold;
+    font-size: 14px;
+    display: none;
+}
+
+.ge-condition-view--valid > .ge-group-condition-view__title > .ge-group-condition-view__title-container > .ge-group-condition-view__debug-label {
+    color: #2ca718;
+    display: flex;
+}
+
+.ge-condition-view--invalid > .ge-group-condition-view__title > .ge-group-condition-view__title-container > .ge-group-condition-view__debug-label {
+    color: #8f1c1c;
+    display: flex;
+}
+
+.unity-enum-field {
+    height: 20px;
+}
+
+.unity-popup-field__input {
+    height: 20px;
+}
+
+.ge-condition-editor__drag-root {
+    flex-direction: column;
+    position: absolute;
+    opacity: 0.5;
+}
+
+.ge-group-condition-view__empty-warning {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+}
+
+.ge-group-condition-view__empty-warning > .unity-label{
+    flex-basis: 0;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.ge-group-condition-view__empty-warning-icon {
+    --unity-image: var(--warning-icon);
+    height: 32px;
+}
+
+.ge-condition-view__indentation-spacer {
+    flex-shrink: 0;
+}
+
+.ge-singe-value-condition-view__value {
+    flex-grow: 1;
+}

@@ -1,0 +1,43 @@
+.ge-port-connector-part__connector {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+}
+
+.ge-port-connector-part__label {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 3px;
+}
+
+.ge-port__expand-toggle {
+    display: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+}
+
+.ge-port__expand-toggle.unity-foldout__toggle > .unity-toggle__input > .unity-toggle__checkmark {
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    margin: -1px; /*because we added a border to the input we need this so that the foldout keeps its size*/
+}
+
+.ge-node__inputs .ge-port__expand-spacer {
+    margin-right: 8px;
+}
+
+.ge-port--expandable .ge-port__expand-toggle {
+    display: flex;
+}
+
+.unity-foldout__toggle > .unity-toggle__input {
+    border-width: 1px;
+}
+
+/*For now foldouts have no standard style for focus state. */
+.ge-port__expand-toggle.unity-foldout__toggle > .unity-toggle__input:focus:enabled {
+    background-color: var(--theme-foldout-background-color-hover);
+    border-color: var(--border-control-focused);
+}

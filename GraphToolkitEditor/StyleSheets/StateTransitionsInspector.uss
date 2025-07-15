@@ -1,0 +1,27 @@
+.ge-state-transitions-inspector__filter {
+    align-self: center;
+    margin-bottom: 8px;
+}
+
+.ge-state-transitions-inspector__filter .unity-button--with-icon {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.ge-state-transitions-inspector__filter .unity-button--with-icon > .unity-button__image {
+    width: 14px;
+    height: 14px;
+}
+
+.ge-state-transitions-inspector__filter .unity-button--with-icon .unity-text-element {
+    padding-left: 4px;
+}
+
+.ge-state-transitions-inspector__filter__incoming-button .unity-button__image,
+.ge-state-transitions-inspector__filter__outgoing-button .unity-button__image {
+    --unity-image-tint-color: var(--transition-to-state-tint);
+}
+
+.unity-button-group__button:checked:disabled {
+    background-color: var(--theme-button-background-color);
+}

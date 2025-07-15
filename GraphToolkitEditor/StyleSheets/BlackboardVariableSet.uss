@@ -1,0 +1,3 @@
+.ge-blackboard-variable-group__foldout {
+    display: none;
+}

@@ -1,0 +1,19 @@
+.ge-expandable-port-property-field {
+    margin-left: -22px;
+}
+
+.ge-expandable-port-property-field__title-container {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ge-expandable-port-property-field__expand-toggle {
+    margin-right: 0;
+}
+
+.ge-expandable-port-property-field__sub-port-fields {
+    padding-left: 41px;
+}
+.ge-expandable-port-property-field__sub-port-fields--collapsed {
+    display: none;
+}

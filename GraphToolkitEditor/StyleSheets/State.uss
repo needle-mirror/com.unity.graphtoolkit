@@ -1,0 +1,63 @@
+﻿.ge-state {
+    width: 275px;
+    height: 90px;
+    --border-radius: 15px;
+    --selection-border-radius: 20px;
+    --state-background-color: var(--graph-color-node-background);
+    --state-icon: var(--graph-state-state-machine-icon);
+    --enter-state-icon: var(--graph-enter-state-state-machine-icon);
+    --unity-colors-progress_bar-background: var(--graph-color-state-state-machine-header-background);
+    overflow: visible;
+}
+
+.ge-state > .ge-graph-element__content-container {
+    background-color: var(--state-background-color);
+}
+
+.ge-state--entry-point {
+    --state-background-color: var(--graph-color-enter-state-background);
+}
+
+.ge-state > .ge-node-title-part {
+    flex-grow: 1;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ge-state .ge-node-title-part__title-container {
+    flex-grow: 0;
+    justify-content: center;
+    --lod-min-text-size: 12;
+    --wanted-text-size: 17;
+}
+
+.ge-state .ge-node-title-part__icon {
+    align-self: center;
+    width: 31px;
+    height: 31px;
+    margin: 0 5px 0 0;
+    background-image: var(--state-icon);
+}
+
+.ge-state--entry-point .ge-node-title-part__icon {
+    background-image: var(--enter-state-icon);
+}
+
+.ge-state__title > .unity-label {
+    text-overflow: ellipsis;
+}
+
+.ge-state .ge-editable-label > .unity-text-field > .unity-base-text-field__input {
+    background-color: var(--graph-color-node-background);
+}
+
+.ge-state--entry-point .ge-editable-title-part__title {
+    color: var(--graph-color-enter-state-label-color)
+}
+
+.ge-state--entry-point .ge-editable-label > .unity-text-field > .unity-base-text-field__input  {
+    background-color: var(--graph-color-enter-state-background);
+    color: var(--graph-color-enter-state-label-color)
+}
+

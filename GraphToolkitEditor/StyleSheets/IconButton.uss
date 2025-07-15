@@ -1,0 +1,19 @@
+.ge-icon-button {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.ge-icon-button__icon {
+    flex-shrink: 0;
+    align-self: center;
+    border-radius: 2px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ge-icon-button:disabled .ge-icon-button__icon {
+    opacity: 0.15;
+}
+
+.ge-icon-button:hover:enabled .ge-icon-button__icon {
+    background-color: var(--graph-color-node-icon-button-hover-background);
+}

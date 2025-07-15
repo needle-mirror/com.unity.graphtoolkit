@@ -1,0 +1,11 @@
+.ge-text-alignment-field .unity-button-group__button--left .unity-button-group__button-icon {
+    background-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/TextAlignment/Left@2x.png");
+}
+
+.ge-text-alignment-field .unity-button-group__button--mid .unity-button-group__button-icon {
+    background-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/TextAlignment/Centered@2x.png");
+}
+
+.ge-text-alignment-field .unity-button-group__button--right .unity-button-group__button-icon {
+    background-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/TextAlignment/Right@2x.png");
+}

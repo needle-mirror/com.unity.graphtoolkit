@@ -1,0 +1,72 @@
+.ge-error-marker
+{
+    position: absolute;
+    align-items: flex-start;
+    flex-direction: row;
+
+    --horizontal-distance: 4;
+    --vertical-distance: 4;
+
+    --error-text-size: 11;
+    --error-text-max-width: 250;
+    --error-icon-width: 12;
+    --error-icon-height: 12;
+
+    --border-color: var(--graph-color-node-border);
+    --background-color: var(--graph-color-node-background);
+
+    --error-text-color: rgba(0,0,0,0.75);
+}
+
+.ge-error-marker__marker-element
+{
+    flex-direction: row;
+}
+
+.ge-error-marker__counter-element
+{
+    align-self: center;
+    padding: 0 2px;
+    margin: 3px 3px 3px 0;
+    border-radius: 5px;
+    background-color: var(--error-text-color);
+    color : var(--graph-color-log);
+    font-size: 5px;
+}
+
+.ge-error-marker__icon
+{
+    margin: 3px;
+}
+
+.ge-error-marker__text-area
+{
+    -unity-text-align: middle-left;
+    white-space: normal;
+    color : #F0F0F0;
+    background-color : var(--error-text-color);
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin: 0 2px;
+    align-self: center;
+}
+
+.ge-error-marker--hidden
+{
+    display: none;
+}
+
+.ge-error-marker--error
+{
+    --border-color: var(--graph-color-error);
+}
+
+.ge-error-marker--warning
+{
+    --border-color: var(--graph-color-warning);
+}
+
+.ge-error-marker--log
+{
+    --border-color: var(--graph-color-log);
+}

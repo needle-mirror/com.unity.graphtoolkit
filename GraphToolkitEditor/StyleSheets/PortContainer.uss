@@ -1,0 +1,58 @@
+.ge-port-container {
+    flex-grow: 1;
+    padding: 4px 8px;
+}
+
+.ge-port-hierarchy-container {
+    --line-color: var(--node-expandable-port-line-color);
+    padding: 0px;
+}
+
+.ge-port-hierarchy-container__container {
+    padding: 4px 8px;
+}
+
+.ge-port-container--port-count-0 {
+    display: none;
+}
+
+.ge-port-hierarchy-container.ge-node__inputs,
+.ge-port-hierarchy-container.ge-node__outputs {
+    align-items: initial;
+    border-right-width: 0;
+    padding-right: 0;
+}
+
+.ge-node__inputs,
+.ge-node__inputs .ge-port-hierarchy-container__container {
+    align-items: stretch; /* Ports should take all the available horizontal space. */
+    border-right-width: 1px;
+    border-color: var(--graph-color-dividers);
+    padding-right: 4px;
+}
+
+.ge-node__outputs .ge-port-connector-part__output-spacer {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.ge-node__outputs,
+.ge-node__outputs .ge-port-hierarchy-container__container {
+    align-items: stretch; /* Ports should take all the available horizontal space. */
+    background-color: var(--graph-color-node-output-background);
+    padding-left: 3px;
+}
+
+.ge-node__vertical-port-container {
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 8px;
+}
+
+.ge-port-hierarchy-container__lines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right:0;
+    bottom: 0;
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Unity.GraphToolkit.UnityRestricted",
+    "rootNamespace": "Unity.GraphToolkit.Internal.Editor",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}

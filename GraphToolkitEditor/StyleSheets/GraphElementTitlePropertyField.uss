@@ -1,0 +1,26 @@
+.ge-graph-element-title-property-field {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ge-graph-element-title-property-field__icon {
+    width: 24px;
+    height: 24px;
+}
+
+.ge-graph-element-title-property-field__icon--empty {
+    display: none;
+}
+
+.ge-graph-element-title-property-field__field {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.ge-graph-element-title-property-field__label {
+    padding-left: 4px;
+    -unity-font-style: bold;
+    font-size: 14px;
+    flex-basis: 0;
+    flex-grow: 1;
+}

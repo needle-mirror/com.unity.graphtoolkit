@@ -1,0 +1,7 @@
+.item-library-theme {
+    --search-placeholder-text-color: #828282;
+    --toggle-item-preview-image: resource("UnityEditor.InspectorWindow@2x");
+    --window-resizer-image: resource("resizer");
+    --favorite-disabled-image: resource("Favorite");
+    --favorite-enabled-image: resource("Favorite_colored");
+}

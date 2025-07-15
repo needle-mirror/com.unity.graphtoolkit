@@ -1,0 +1,23 @@
+{
+    "name": "Unity.GraphToolkit.Internal.Editor",
+    "rootNamespace": "Unity.GraphToolkit.Internal.Editor",
+    "references": [
+        "Unity.CommandStateObserver",
+        "Unity.GraphToolkit.Utility.Editor",
+        "Unity.GraphToolkit.Common.Editor",
+        "Unity.GraphToolsAuthoringFramework.InternalEditorBridge",
+        "Unity.GraphToolsAuthoringFramework.InternalBridge",
+        "Unity.GraphToolkit.UnityRestricted"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,33 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<# String typeName = null; #>
+
+//Do not edit UserNodeModelImp.cs directly : this file is auto-generated. Do not edit it directly. Make changes in UserNodeModelImp.inc.cs.t4 and re-run the template. ( Right click on .tt file in Rider).
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Unity.GraphToolkit.Editor.Implementation
+{
+
+    [Serializable]
+    class UserNodeModelImp : NodeModel, IUserNodeModelImp
+    {
+<# typeName = "Node"; #>
+<#@ include file="UserNodeModelImp.inc.cs.t4" #>
+    }
+
+    partial class UserBlockNodeModelImp
+    {
+<# typeName = "BlockNode"; #>
+<#@ include file="UserNodeModelImp.inc.cs.t4" #>
+    }
+
+    partial class UserContextNodeModelImp
+    {
+<# typeName = "ContextNode"; #>
+<#@ include file="UserNodeModelImp.inc.cs.t4" #>
+    }
+
+}

@@ -1,0 +1,25 @@
+.subgraph-properties__container {
+    max-width: 240px;
+}
+
+.subgraph-properties__toggle-container {
+    margin-left: 15px;
+    white-space: normal;
+}
+
+.subgraph-properties__description {
+    flex-direction: column;
+    min-height: 100px;
+}
+
+.subgraph-properties__text-area {
+    white-space: normal;
+}
+
+.subgraph-properties__description > .unity-base-text-field__input {
+    align-self: stretch;
+}
+
+.subgraph-properties__hidden {
+    display: none;
+}

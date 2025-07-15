@@ -1,0 +1,17 @@
+.ge-save-button {
+    min-height: var(--toolbar-button-height);
+}
+
+.ge-save-button .unity-dropdown-toggle__toggle {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.ge-save-button .unity-dropdown-toggle__toggle > Image {
+    min-width: 26px;
+}
+
+/* There is no space in vertical toolbar to have the standard size button + the dropdown*/
+.unity-overlay-container-vertical .ge-save-button__button {
+    min-width: 16px;
+}

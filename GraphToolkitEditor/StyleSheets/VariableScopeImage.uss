@@ -1,0 +1,84 @@
+/*******************************/
+/* Scope image colors by types */
+/*******************************/
+
+.ge-scope-image {
+    --scope-image-color: var(--graph-color-port-default);
+}
+
+.ge-scope-image--data-type-execution-flow {
+    --scope-image-color: var(--port-type-execution);
+}
+
+.ge-scope-image--data-type-texture,
+.ge-scope-image--data-type-texture2d {
+    --scope-image-color: var(--port-type-textures);
+}
+
+.ge-scope-image--data-type-float4,
+.ge-scope-image--data-type-vector4,
+.ge-scope-image--data-type-quaternion,
+.ge-scope-image--data-type-color {
+    --scope-image-color: var(--port-type-float4);
+}
+
+.ge-scope-image--data-type-int,
+.ge-scope-image--data-type-int32,
+.ge-scope-image--data-type-int64 {
+    --scope-image-color: var(--port-type-integer);
+}
+
+.ge-scope-image--data-type-bool,
+.ge-scope-image--data-type-boolean {
+    --scope-image-color: var(--port-type-boolean);
+}
+
+.ge-scope-image--data-type-matrix,
+.ge-scope-image--data-type-matrix4x4 {
+    --scope-image-color: var(--port-type-matrix);
+}
+
+.ge-scope-image--data-type-game-object {
+    --scope-image-color: var(--port-type-gameobject);
+}
+
+.ge-scope-image--data-type-single,
+.ge-scope-image--data-type-double,
+.ge-scope-image--data-type-float,
+.ge-scope-image--data-type-float1 {
+    --scope-image-color: var(--port-type-float);
+}
+
+.ge-scope-image--data-type-float2,
+.ge-scope-image--data-type-vector2 {
+    --scope-image-color: var(--port-type-float2);
+}
+
+.ge-scope-image--data-type-component {
+    --scope-image-color:var(--port-type-component);
+}
+
+.ge-scope-image--data-type-float3,
+.ge-scope-image--data-type-vector3 {
+    --scope-image-color: var(--port-type-float3);
+}
+
+.ge-scope-image--data-type-string {
+    --scope-image-color: var(--port-type-string);
+}
+
+.ge-scope-image--data-type-missing-port {
+    --scope-image-color: var(--port-type-missing);
+}
+
+.ge-scope-image--data-type-animation-curve {
+    --scope-image-color: var(--port-type-animation);
+}
+
+.ge-scope-image--data-type-mesh {
+    --scope-image-color: var(--port-type-mesh);
+}
+
+.ge-scope-image--data-type-physics {
+    --scope-image-color: var(--port-type-physics);
+}

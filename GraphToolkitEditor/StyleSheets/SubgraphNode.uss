@@ -1,0 +1,25 @@
+.ge-subgraph-node__tab-drag-area {
+    height: 8px;
+}
+
+.ge-subgraph-node__tab {
+    height: 16px;
+    position : absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    --border-color: var(--graph-color-node-border);
+}
+
+.ge-subgraph-node__hide-tab-bottom {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    left: 0;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    height: 2px;
+    background-color: var(--graph-color-node-background);
+    border-left-color: var(--graph-color-node-border);
+    border-right-color: var(--graph-color-node-border);
+}

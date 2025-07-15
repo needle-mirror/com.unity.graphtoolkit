@@ -1,0 +1,22 @@
+{
+    "name": "Unity.GraphToolsAuthoringFramework.InternalEditorBridge",
+    "rootNamespace": "Unity.GraphToolkit.InternalEditorBridge",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "Unity",
+            "expression": "6000.1.0b12",
+            "define": "UGTK_UNITY_6000_1_B12_OR_NEWER"
+        }
+    ],
+    "noEngineReferences": false
+}

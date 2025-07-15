@@ -1,0 +1,292 @@
+/**************/
+/* Type icons */
+/**************/
+
+.ge-icon-variable,
+.ge-port__icon,
+.ge-node--capsule__cache-icon,
+.ge-blackboard-field__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Advanced@4x.png");
+}
+
+.ge-icon-polymorphic {
+    --unity-image: var(--polymorphic-icon);
+}
+
+.ge-icon--data-type-game-object,
+.item-library-custom-item-game-object__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Core_GameObject@4x.png");
+}
+
+.ge-icon--data-type-float,
+.ge-icon--data-type-float1,
+.ge-icon--data-type-single,
+.ge-icon--data-type-double,
+.item-library-custom-item-float__icon,
+.item-library-custom-item-float1__icon,
+.item-library-custom-item-single__icon,
+.item-library-custom-item-double__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Float@4x.png");
+}
+
+.ge-icon--data-type-int16,
+.item-library-custom-item-int16__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Integer16@4x.png");
+}
+
+.ge-icon--data-type-integer,
+.ge-icon--data-type-int,
+.ge-icon--data-type-int32,
+.item-library-custom-item-int__icon,
+.item-library-custom-item-integer__icon,
+.item-library-custom-item-int32__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Integer32@4x.png");
+}
+
+.ge-icon--data-type-int64,
+.item-library-custom-item-int64__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Integer64@4x.png");
+}
+
+.ge-icon--data-type-boolean,
+.item-library-custom-item-boolean__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Boolean@4x.png");
+}
+
+.ge-icon--data-type-string,
+.item-library-custom-item-string__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/String@4x.png");
+}
+
+.ge-icon--data-type-float2,
+.ge-icon--data-type-vector2,
+.item-library-custom-item-float2__icon,
+.item-library-custom-item-vector2__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Vector2@4x.png");
+}
+
+.ge-icon--data-type-float3,
+.ge-icon--data-type-vector3,
+.item-library-custom-item-float3__icon,
+.item-library-custom-item-vector3__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Vector3@4x.png");
+}
+
+.ge-icon--data-type-float4,
+.ge-icon--data-type-vector4,
+.item-library-custom-item-float4__icon,
+.item-library-custom-item-vector4__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Vector4@4x.png");
+}
+
+.ge-icon--data-type-quaternion,
+.item-library-custom-item-quaternion__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Quaternion@4x.png");
+}
+
+.ge-icon--data-type-gradient,
+.item-library-custom-item-gradient__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Gradient@4x.png");
+}
+
+.ge-icon--data-type-animation-curve,
+.item-library-custom-item-animation-curve__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/AnimationCurve@4x.png");
+}
+
+.ge-icon--data-type-transform,
+.item-library-custom-item-transform__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Core_Transform@4x.png");
+}
+
+.ge-icon--data-type-material,
+.item-library-custom-item-material__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Graphics_Material@4x.png");
+}
+
+.ge-icon--data-type-list,
+.item-library-custom-item-list__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/List@4x.png");
+}
+
+.ge-icon--data-type-array,
+.item-library-custom-item-array__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Array@4x.png");
+}
+
+.ge-icon--data-type-enum,
+.item-library-custom-item-enum__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Enum@4x.png");
+}
+
+.ge-icon--data-type-dictionary,
+.item-library-custom-item-dictionary__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Dictionary@4x.png");
+}
+
+.ge-icon--data-type-mesh,
+.item-library-custom-item-mesh__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Graphics_Mesh@4x.png");
+}
+
+.ge-icon--data-type-texture2d,
+.item-library-custom-item-texture2d__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Texture2D@4x.png");
+}
+
+.ge-icon--data-type-texture2d-array,
+.item-library-custom-item-texture2d__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Texture2DArray@4x.png");
+}
+
+.ge-icon--data-type-texture3d,
+.item-library-custom-item-texture3d__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Texture3D@4x.png");
+}
+
+.ge-icon--data-type-cubemap,
+.item-library-custom-item-cubemap__icon {
+    --unity-image: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Port/Graphics_Cubemap@4x.png");
+}
+
+.ge-icon--data-type-automatic,
+.item-library-custom-item-automatic__icon {
+    --unity-image: var(--polymorphic-icon);
+}
+
+.ge-blackboard-field .ge-icon--data-type-execution-flow,
+.ge-icon--data-type-execution-flow,
+.item-library-custom-item-execution-flow__icon,
+.item-library-custom-item-execution-flow-input__icon,
+.ge-icon--data-type-execution-flow.ge-port--direction-input,
+.item-library-custom-item-execution-flow__icon.ge-port--direction-input {
+    --unity-image: var(--input-icon);
+}
+
+.ge-blackboard-field.ge-blackboard-field--write-only .ge-icon--data-type-execution-flow,
+.ge-icon--data-type-execution-flow.ge-port--direction-output,
+.item-library-custom-item-execution-flow-output__icon,
+.item-library-custom-item-execution-flow__icon.ge-port--direction-output {
+    --unity-image: var(--output-icon);
+}
+
+.ge-port--data-type-color .ge-port__icon,
+.ge-icon--data-type-color,
+.item-library-custom-item-color__icon
+{
+    --unity-image: var(--color-type-icon);
+}
+
+.ge-port--data-type-missing-port .ge-port__icon {
+    --unity-image: var(--unity-icons-console_entry_error);
+}
+
+.ge-icon--data-type-execution-flow,
+.item-library-custom-item-execution-flow__icon,
+.item-library-custom-item-execution-flow-input__icon,
+.item-library-custom-item-execution-flow-output__icon {
+    --unity-image-tint-color: var(--port-type-execution);
+}
+
+.ge-icon--data-type-texture,
+.ge-icon--data-type-texture2d,
+.item-library-custom-item-texture__icon,
+.item-library-custom-item-texture2d__icon {
+    --unity-image-tint-color: var(--port-type-textures);
+}
+
+.ge-icon--data-type-float4,
+.ge-icon--data-type-vector4,
+.ge-icon--data-type-quaternion,
+.item-library-custom-item-float4__icon,
+.item-library-custom-item-vector4__icon,
+.item-library-custom-item-quaternion__icon {
+    --unity-image-tint-color: var(--port-type-float4);
+}
+
+.ge-icon--data-type-int,
+.ge-icon--data-type-integer,
+.ge-icon--data-type-int32,
+.ge-icon--data-type-int64,
+.item-library-custom-item-int__icon,
+.item-library-custom-item-integer__icon,
+.item-library-custom-item-int32__icon,
+.item-library-custom-item-int64__icon {
+    --unity-image-tint-color: var(--port-type-integer);
+}
+
+.ge-icon--data-type-bool,
+.ge-icon--data-type-boolean,
+.item-library-custom-item-bool_icon,
+.item-library-custom-item-boolean__icon {
+    --unity-image-tint-color: var(--port-type-boolean);
+}
+
+.ge-icon--data-type-matrix,
+.ge-icon--data-type-matrix4x4,
+.item-library-custom-item-matrix__icon,
+.item-library-custom-item-matrix4x4__icon {
+    --unity-image-tint-color: var(--port-type-matrix);
+}
+
+.ge-icon--data-type-game-object,
+.item-library-custom-item-game-object__icon {
+    --unity-image-tint-color: var(--port-type-gameobject);
+}
+
+.ge-icon--data-type-single,
+.ge-icon--data-type-double,
+.ge-icon--data-type-float,
+.ge-icon--data-type-float1,
+.item-library-custom-item-single__icon,
+.item-library-custom-item-double__icon,
+.item-library-custom-item-float__icon,
+.item-library-custom-item-float1__icon {
+    --unity-image-tint-color: var(--port-type-float);
+}
+
+.ge-icon--data-type-component,
+.item-library-custom-item-component__icon {
+    --unity-image-tint-color: var(--port-type-component);
+}
+
+.ge-icon--data-type-float2,
+.ge-icon--data-type-vector2,
+.item-library-custom-item-float2__icon,
+.item-library-custom-item-vector2__icon {
+    --unity-image-tint-color: var(--port-type-float2);
+}
+
+.ge-icon--data-type-float3,
+.ge-icon--data-type-vector3,
+.item-library-custom-item-float3__icon,
+.item-library-custom-item-vector3__icon {
+    --unity-image-tint-color: var(--port-type-float3);
+}
+
+.ge-icon--data-type-string,
+.item-library-custom-item-string__icon {
+    --unity-image-tint-color: var(--port-type-string);
+}
+
+.ge-icon--data-type-animation-curve,
+.item-library-custom-item-animation-curve__icon {
+    --unity-image-tint-color: var(--port-type-animation);
+}
+
+.ge-icon--data-type-mesh,
+.item-library-custom-item-mesh__icon {
+    --unity-image-tint-color: var(--port-type-mesh);
+}
+
+.ge-icon--data-type-enum,
+.ge-icon--data-type-gradient,
+.item-library-custom-item-enum__icon,
+.item-library-custom-item-gradient__icon {
+    --unity-image-tint-color: var(--graph-color-port-default);
+}
+
+.ge-icon--data-type-automatic {
+    --unity-image-tint-color: var(--port-type-automatic);
+}
+

@@ -1,0 +1,65 @@
+.ge-graph-view {
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+    min-width: 300px;
+    overflow: hidden;
+}
+
+#disabled-overlay {
+    display: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    position: absolute;
+}
+
+.ge-graph-view #graph-view-container {
+    flex: 1 1 auto;
+}
+
+.ge-graph-view #content-view-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.ge-graph-view #marker-container {
+    overflow: visible;
+}
+
+GridBackground {
+    --line-color: var(--graph-color-canvas-grid-base);
+    --thick-line-color: var(--graph-color-canvas-grid);
+    --spacing: 15.0;
+    --thick-lines: 10;
+    background-color: var(--graph-color-canvas-background);
+}
+
+FreehandElement {
+    --segment-size: 7;
+    --segment-color: var(--graph-color-selection);
+    --delete-segment-color: var(--graph-color-selection-delete);
+}
+
+RectangleSelect {
+    --border-color: var(--graph-color-selection);
+    --fill-color: var(--graph-color-selection-fill);
+}
+
+Layer {
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    /* Needs to set the flex-direction to row because when set to column
+    Yoga try to constrain absolute childs to that size as well.
+    This allows text within the absolute child to wrap to the size of its parent.
+    See Yoga.c YGNodeAbsoluteLayoutChild function. */
+    flex-direction: row;
+}

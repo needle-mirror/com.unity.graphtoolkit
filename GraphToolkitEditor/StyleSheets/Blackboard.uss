@@ -1,0 +1,349 @@
+.ge-blackboard {
+    position: relative;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    font-size: var(--unity-font-size);
+    flex: 1;
+}
+
+.ge-blackboard .unity-tree-view {
+    background-color: transparent;
+}
+
+.ge-blackboard .ge-blackboard--unselectable-item:hover:enabled {
+    background-color: transparent;
+}
+
+.ge-blackboard .unity-scroll-view__content-container {
+    min-height:0;
+}
+
+.ge-blackboard-element__content-container {
+    flex-grow: 1;
+}
+
+.ge-blackboard-element__selection-border {
+    position: absolute;
+    --margin: -1px;
+    left: var(--margin);
+    right: var(--margin);
+    top: var(--margin);
+    bottom: var(--margin);
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+/*              Header              */
+
+.ge-blackboard__header {
+    margin: 4px 0 2px;
+    padding: 4px;
+}
+
+.ge-blackboard-toolbar-part__toolbar {
+    padding-top: 10px;
+    flex-direction: row;
+}
+
+.ge-blackboard-title-part__title {
+    font-size : var(--unity-font-size-big);
+    color: var(--blackboard-title-text);
+}
+
+.ge-blackboard-title-part__subtitle {
+    font-size: var(--unity-font-size-small);
+    color: var(--blackboard-subtitle-text);
+}
+
+.ge-blackboard-toolbar-part__add-button {
+    font-size : 24px;
+    height: 24px;
+    width: 32px;
+    margin-right: 1px;
+    padding-bottom: 5px;
+}
+
+.ge-blackboard-toolbar-part__menu-button {
+    margin-left: 0;
+    width: 14px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ge-blackboard--windowed .ge-blackboard__header {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+/*             Section          */
+
+.ge-blackboard-section__header {
+    position: absolute;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    right: 0;
+    left: 0;
+}
+
+.ge-blackboard-section__title-placeholder {
+    height: 24px;
+}
+
+.ge-blackboard-section.ge-blackboard-element:hover {
+    border-color: rgba(0,0,0,0);
+}
+
+.ge-blackboard-section > .ge-blackboard-variable-group__items {
+    padding-right:4px;
+    padding-left:4px;
+}
+
+.ge-blackboard-section > .ge-blackboard-variable-group__items > .ge-blackboard-row > .ge-blackboard-row__header > .ge-blackboard-row__header-container > .ge-blackboard-field {
+    margin-left: 15px;
+}
+
+.ge-blackboard-variable-group__title-part {
+    color: var(--blackboard-group-text);
+    font-size: var(--unity-font-size);
+}
+
+.ge-blackboard-variable-group__title-part.ge-blackboard-section__title-part {
+    color: var(--blackboard-section-header-text);
+    font-size: var(--unity-font-size);
+}
+
+.unity-button.ge-blackboard-section__add {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*             Group          */
+
+.ge-blackboard-variable-group__bottom-line {
+    border-color: black;
+    border-bottom-width: 1px;
+}
+
+.ge-blackboard-variable-group__items {
+    padding-left: 13px;
+}
+
+.ge-blackboard-variable-group .ge-editable-label > .unity-label:hover {
+    border-color: rgba(0,0,0,0);
+}
+
+.ge-blackboard-variable-group__title-container {
+    flex-direction: row;
+}
+
+.ge-blackboard-variable-group__icon{
+    width: 16px;
+    height: 16px;
+}
+
+.ge-blackboard-variable-group__title-part {
+    flex: 1 1 auto;
+}
+
+/*          Row             */
+
+.ge-blackboard-row {
+    padding: 0 2px 0 0;
+}
+
+.ge-blackboard-row__header {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.ge-blackboard-row__header-container {
+    flex: 1 0 0;
+    align-items: stretch;
+}
+
+.ge-blackboard-row__property-view-container {
+    flex-direction: row;
+}
+
+.ge-blackboard-row:hover .ge-blackboard-field--highlighted > .ge-blackboard-element__selection-border {
+    border-width: 2px;
+    --margin: -3px;
+}
+
+.ge-blackboard-row:hover .ge-blackboard-field--highlighted > .ge-blackboard-element__selection-border,
+.ge-blackboard-row .ge-blackboard-field--highlighted > .ge-blackboard-element__selection-border {
+    --custom-border-color: var(--blackboard-capsule-selection-counterpart-border);
+}
+
+.ge-blackboard-row--expanded .ge-blackboard-field > .ge-blackboard-element__selection-border {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ge-blackboard-row--expanded .ge-blackboard-field:checked:hover > .ge-blackboard-element__selection-border {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/*          Field           */
+
+.ge-blackboard-field__collapse-button {
+    padding: 4px;
+}
+
+.ge-blackboard-field--expanded .ge-blackboard-variable-property-view {
+    display: flex;
+}
+
+.ge-blackboard-field--expanded .ge-blackboard-field__capsule
+{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-width: 0;
+}
+
+.ge-blackboard-field {
+    flex: 1 0 0;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2px 0;
+    padding: 1px;
+    --border-radius: 4px;
+    --selection-border-radius: 6px;
+}
+
+.ge-blackboard-field__capsule {
+    flex-direction: row;
+    align-items: center;
+    margin: 1px;
+    margin-bottom: 0;
+    border-radius: var(--border-radius);
+    border-width: 1px;
+    border-color: var(--graph-color-node-border);
+    background-color: var(--blackboard-capsule-background);
+    padding: 4px 8px;
+    height: 24px;
+}
+
+.ge-blackboard-field--placeholder > .ge-blackboard-field__capsule {
+    border-color: var(--unity-colors-error-text);
+}
+
+
+.ge-blackboard-field--placeholder > .ge-blackboard-field__capsule > .ge-icon--data-type-missing-type {
+    --unity-image: var(--unity-icons-console_entry_error);
+}
+
+.ge-blackboard-field__icon {
+    margin-left: 4px;
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    --graph-color-icon-default: var(--graph-color-port-default);
+}
+
+.ge-blackboard-field .ge-blackboard-field__name-label > .unity-text-field {
+    margin-top: -2px;
+    margin-bottom: -4px;
+}
+
+.ge-blackboard-field .ge-blackboard-field__name-label > .unity-label {
+    padding: 0 5px;
+    border-width: 0;
+    height: 14px;
+}
+
+.ge-blackboard-field__name-label {
+    font-size: var(--unity-font-size);
+}
+
+.ge-blackboard-field__scope-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.ge-blackboard-field--highlighted > .ge-blackboard-element__selection-border {
+    --custom-border-color: var(--blackboard-capsule-selection-counterpart-border);
+}
+
+.ge-blackboard-field > .ge-blackboard-element__selection-border {
+    border-radius: var(--selection-border-radius);
+}
+
+.ge-blackboard-field:hover > .ge-blackboard-element__selection-border {
+    --custom-border-color: var(--selection-hover);
+}
+
+.ge-blackboard-field:checked > .ge-blackboard-element__selection-border {
+    --custom-border-color: var(--selection-checked);
+}
+
+.ge-blackboard-field:checked:hover > .ge-blackboard-element__selection-border {
+    --custom-border-color: var(--selection-checked-hover);
+}
+
+/*          PropertyView            */
+
+.ge-blackboard-variable-property-view {
+    display: none;
+    margin-left: 1px;
+    padding: 4px 8px;
+    border-width: 1px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    align-self: stretch;
+    background-color: var(--blackboard-capsule-background);
+    border-color: var(--graph-color-node-border);
+}
+
+.ge-blackboard-variable-property-view__row {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 2px 0 10px;
+}
+
+.ge-blackboard-variable-property-view__row-label {
+    min-width: 75px;
+    font-size: var(--unity-font-size-semi-small);
+}
+
+.ge-blackboard-variable-property-view__row-control {
+    flex: 1;
+    flex-direction: row;
+    margin: 2px 4px;
+}
+
+.ge-blackboard-variable-property-view__row-control > .unity-label {
+    flex: 1;
+    -unity-text-align: middle-left;
+}
+
+.ge-blackboard-variable-property-view__row-control > .unity-base-field {
+    flex: 1;
+}
+
+.ge-blackboard-variable-property-view__row-control.ge-inline-value-editor {
+    flex-direction: row;
+}
+
+.ge-blackboard-variable-property-view__row-control.ge-inline-value-editor .unity-base-text-field__input {
+    width: 35px;
+}
+
+.ge-blackboard-variable-property-view__row .unity-button {
+    min-width: 100px;
+    font-size: var(--unity-font-size-semi-small);
+    height: 18px;
+    flex-grow: 0;
+    flex-basis: auto;
+    padding-top: 0;
+    margin-left: 4px;
+    margin-right: 6px;
+    -unity-text-align: middle-center;
+}

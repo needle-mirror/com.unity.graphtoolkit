@@ -1,0 +1,14 @@
+.ge-variable-exposed-property-field {
+    flex-direction: row;
+    align-items: center;
+}
+
+.unity-label {
+    -unity-text-align: middle-left;
+    flex-grow: 1;
+}
+
+.unity-toggle {
+    margin-right: 0;
+    margin-bottom: 0;
+}

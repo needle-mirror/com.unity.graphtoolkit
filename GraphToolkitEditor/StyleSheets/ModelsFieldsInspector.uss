@@ -1,0 +1,20 @@
+.ge-multiple-models-title-property-field__title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    padding-bottom: 8px;
+}
+
+/* Mimic the style of the global inspector when heterogeneous elements are selected */
+.ge-model-inspector__ge-type-button {
+    border-width: 2px;
+    padding-left: 2px;
+    background-color: transparent;
+    border-color: transparent;
+    -unity-text-align: middle-left;
+}
+
+.ge-model-inspector__ge-type-button:active {
+    background-color: var(--graph-color-selection-fill);
+    border-color: var(--graph-color-selection-stroke);
+    border-radius: 6px;
+}
