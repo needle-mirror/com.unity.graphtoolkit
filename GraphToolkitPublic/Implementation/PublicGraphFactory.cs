@@ -315,11 +315,11 @@ namespace Unity.GraphToolkit.Editor.Implementation
 
                 var graphAttribute = graphType.GetCustomAttribute<GraphAttribute>();
 
-                if (graphAttribute != null && graphAttribute.options.HasFlag(GraphOptions.AutoIncludeNodesFromGraphAssembly))
+                if (graphAttribute != null && !graphAttribute.options.HasFlag(GraphOptions.DisableAutoInclusionOfNodesFromGraphAssembly))
                 {
                     foreach (var type in graphType.Assembly.GetTypes())
                     {
-                        if( addedTypes.Contains(type))
+                        if (addedTypes.Contains(type))
                             continue;
                         if (!typeof(Node).IsAssignableFrom(type))
                             continue;

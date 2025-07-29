@@ -25,9 +25,9 @@ namespace Unity.GraphToolkit.Editor
         public static readonly string ghostUssClassName = ussClassName.WithUssModifier(ghostUssModifier);
 
         /// <summary>
-        /// The USS class name added to global transitions.
+        /// The USS class name added to local transitions.
         /// </summary>
-        public static readonly string globalTransitionUssClassName = ussClassName.WithUssModifier("global");
+        public static readonly string localTransitionUssClassName = ussClassName.WithUssModifier("local");
 
         /// <summary>
         /// The USS class name added to self transitions.
@@ -220,7 +220,7 @@ namespace Unity.GraphToolkit.Editor
             AddToClassList(ussClassName);
             EnableInClassList(ghostUssClassName, Model is IGhostWireModel);
             EnableInClassList(selfTransitionUssClassName, TransitionModel.TransitionSupportKind == TransitionSupportKind.Self);
-            EnableInClassList(globalTransitionUssClassName, TransitionModel.TransitionSupportKind == TransitionSupportKind.Global);
+            EnableInClassList(localTransitionUssClassName, TransitionModel.TransitionSupportKind == TransitionSupportKind.Local);
             EnableInClassList(onEnterSelectorUssClassName, TransitionModel.TransitionSupportKind == TransitionSupportKind.OnEnter);
             EnableInClassList(stateToStateSelectorUssClassName, TransitionModel.TransitionSupportKind == TransitionSupportKind.StateToState);
             this.AddPackageStylesheet("Wire.uss");

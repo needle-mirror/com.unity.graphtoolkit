@@ -66,7 +66,7 @@ namespace Unity.GraphToolkit.Editor
             });
             m_FilterButton.Add(new Button()
             {
-                text = "Global",
+                text = "Local",
                 iconImage = Background.FromTexture2D(AssetDatabase.LoadAssetAtPath<Texture2D>(
                     EditorGUIUtility.isProSkin ?
                     "Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_AnyStateTransition.png" :
@@ -254,7 +254,7 @@ namespace Unity.GraphToolkit.Editor
                         transitionSupport.style.display = value[0] ? DisplayStyle.Flex : DisplayStyle.None;
                         hasOne[0] = true;
                         break;
-                    case TransitionSupportKind.Global:
+                    case TransitionSupportKind.Local:
                         transitionSupport.style.display = value[1] ? DisplayStyle.Flex : DisplayStyle.None;
                         hasOne[1] = true;
                         break;

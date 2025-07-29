@@ -115,7 +115,7 @@ namespace Unity.GraphToolkit.Editor
             /// <summary>
             /// The value for standard quick settings properties.
             /// </summary>
-            QuickSettings = QuickSettingsAttributeOnly | TypeProperty | DefaultValueProperty | ExposedProperty | TooltipProperty
+            QuickSettings = QuickSettingsAttributeOnly | TypeProperty | DefaultValueProperty | ExposedProperty
         }
 
         /// <summary>

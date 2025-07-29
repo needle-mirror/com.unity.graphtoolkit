@@ -74,7 +74,7 @@ namespace Unity.GraphToolkit.Editor
             var toolBar = new VisualElement();
             toolBar.AddToClassList(toolbarUssClassName);
 
-            var button = new Button() { text = "+" };
+            var button = new Button();
             button.AddToClassList(addButtonUssClassname);
             toolBar.Add(button);
             DisableContextualMenu(button);

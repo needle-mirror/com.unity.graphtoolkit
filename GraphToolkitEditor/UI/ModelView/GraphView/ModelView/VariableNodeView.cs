@@ -68,8 +68,10 @@ namespace Unity.GraphToolkit.Editor
                 m_ScopeImage.ReadWriteModifiers = variableDeclarationModel.Modifiers;
 
                 // We have to wait for the style to be resolved to get the right Port Color.
-                schedule.Execute(_ =>
-                    m_ScopeImage.Color = portContainer?.Port?.PortColor ?? Port.DefaultPortColor).ExecuteLater(0);
+                m_ScopeImage.RegisterCallbackOnce<GeometryChangedEvent>(_ =>
+                {
+                    m_ScopeImage.Color = portContainer?.Port?.PortColor ?? Port.DefaultPortColor;
+                });
             }
         }
     }

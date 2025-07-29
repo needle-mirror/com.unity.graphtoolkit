@@ -390,19 +390,11 @@ namespace Unity.GraphToolkit.Editor
             }
             else
             {
-                if (WantedTextSize == 0)
+                te.RegisterCallbackOnce<GeometryChangedEvent>(evt =>
                 {
-                    // postpone the execution because the first UpdateFromModel is called way to early for the te to be setup and WantedTextSize to be defined.
-                    te.schedule.Execute(
-                        () =>
-                        {
-                            SetTitleMinWidth(te);
-                        }).ExecuteLater(0);
-                }
-                else
-                {
+                    // Set dependencies only once the layout is valid
                     SetTitleMinWidth(te);
-                }
+                });
             }
         }
 

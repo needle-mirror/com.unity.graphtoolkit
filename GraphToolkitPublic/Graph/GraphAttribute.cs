@@ -16,10 +16,10 @@ namespace Unity.GraphToolkit.Editor
     /// </remarks>
     /// <example>
     /// <para>
-    /// This example keeps the default behavior and adds support for subgraphs by combining <see cref="GraphOptions.Default"/> with <see cref="GraphOptions.SupportsSubgraphs"/>.
+    /// This example keeps the default behavior and adds support for subgraphs by enabling <see cref="GraphOptions.SupportsSubgraphs"/>.
     /// </para>
     /// <code>
-    /// [Graph(".mygraph", GraphOptions.Default | GraphOptions.SupportsSubgraphs)]
+    /// [Graph(".mygraph", GraphOptions.SupportsSubgraphs)]
     /// public class MyGraph : Graph { }
     /// </code>
     /// </example>
@@ -40,7 +40,7 @@ namespace Unity.GraphToolkit.Editor
         /// Gets the graph configuration options.
         /// </summary>
         /// <remarks>
-        /// These options define specific behaviors of the graph, such as <see cref="GraphOptions.SupportsSubgraphs"/> or <see cref="GraphOptions.AutoIncludeNodesFromGraphAssembly"/>.
+        /// These options define specific behaviors of the graph, such as <see cref="GraphOptions.SupportsSubgraphs"/> or <see cref="GraphOptions.DisableAutoInclusionOfNodesFromGraphAssembly"/>.
         /// </remarks>
         public GraphOptions options { get; }
 
@@ -59,10 +59,10 @@ namespace Unity.GraphToolkit.Editor
         /// </remarks>
         /// <example>
         /// <para>
-        /// This example keeps the default behavior and adds support for subgraphs by combining <see cref="GraphOptions.Default"/> with <see cref="GraphOptions.SupportsSubgraphs"/>.
+        /// This example keeps the default behavior and adds support for subgraphs by enabling <see cref="GraphOptions.SupportsSubgraphs"/>.
         /// </para>
         /// <code>
-        /// [Graph(".mygraph", GraphOptions.Default | GraphOptions.SupportsSubgraphs)]
+        /// [Graph(".mygraph", GraphOptions.SupportsSubgraphs)]
         /// public class MyGraph : Graph { }
         /// </code>
         /// </example>

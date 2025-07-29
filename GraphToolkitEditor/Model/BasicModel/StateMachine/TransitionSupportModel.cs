@@ -47,9 +47,9 @@ namespace Unity.GraphToolkit.Editor
     internal enum TransitionSupportKind
     {
         /// <summary>
-        /// A transition that can come from any state.
+        /// A transition that can come from any state at the current level of the state machine.
         /// </summary>
-        Global,
+        Local,
 
         /// <summary>
         /// A transition to the same state.

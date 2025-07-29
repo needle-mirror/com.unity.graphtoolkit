@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.ShortcutManagement;
-using UnityEngine;
 
 namespace Unity.GraphToolkit.Editor
 {
@@ -12,11 +10,6 @@ namespace Unity.GraphToolkit.Editor
     [UnityRestricted]
     internal static class ShortcutHelper
     {
-        static bool BlackboardShortcutFilter(string shortcutId)
-        {
-            return shortcutId == ShortcutShowItemLibraryEvent.id;
-        }
-
         /// <summary>
         /// Registers all GTF provided shortcuts for tool <paramref name="toolName"/>.
         /// </summary>
@@ -37,61 +30,6 @@ namespace Unity.GraphToolkit.Editor
             bool registerNow = false)
         {
             ShortcutProviderProxy.GetInstance().RemoveTool(toolName, typeof(T), shortcutFilter, registerNow);
-        }
-
-        internal static void RegisterDefaultShortcutsForBlackboard<T>(string toolName)
-        {
-            ShortcutProviderProxy.GetInstance().AddTool(toolName, typeof(T), BlackboardShortcutFilter);
-        }
-
-        /// <summary>
-        /// Appends a hotkey suffix to a menu item that has the same effect as a shortcut.
-        /// </summary>
-        /// <param name="menuItemText">The menu item name.</param>
-        /// <param name="toolName">The name of the tool doing this request.</param>
-        /// <param name="shortcutId">The shortcut id (without the tool name prefix).</param>
-        /// <returns>Returns <paramref name="menuItemText"/> appended with a string representing the
-        /// key bound to the shortcut <paramref name="shortcutId"/></returns>
-        public static string CreateShortcutMenuItemEntry(string menuItemText, string toolName, string shortcutId)
-        {
-            ShortcutBinding binding;
-            try
-            {
-                binding = ShortcutManager.instance.GetShortcutBinding(toolName + "/" + shortcutId);
-            }
-            catch (ArgumentException)
-            {
-                Debug.LogWarning(
-                    "Shortcuts bindings do not appear to be registered for your tool.\n" +
-                    "To register the default bindings in your tool add the following code\n" +
-                    "(where MyGraphWindow is your tool's window type and toolName is the human readable name of your tool):\n\n" +
-                    "[InitializeOnLoadMethod]\n" +
-                    "static void RegisterTool()\n" +
-                    "{\n" +
-                    "    ShortcutHelper.RegisterDefaultShortcuts<MyGraphWindow>(toolName);\n" +
-                    "}\n\n");
-                return menuItemText;
-            }
-
-            var hotKey = "";
-            if (binding.keyCombinationSequence.Count() == 1)
-            {
-                var kc = binding.keyCombinationSequence.First();
-
-                if (kc.action)
-                    hotKey += "%";
-                if (kc.alt)
-                    hotKey += "&";
-                if (kc.shift)
-                    hotKey += "#";
-
-                if (hotKey == "")
-                    hotKey = "_";
-
-                hotKey = " " + hotKey + kc.keyCode;
-            }
-
-            return menuItemText + hotKey;
         }
     }
 }

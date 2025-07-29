@@ -13,8 +13,7 @@ namespace Unity.GraphToolkit.Editor
     /// <br/>
     /// By default, nodes defined in the same assembly as the graph are considered compatible and available.
     /// In this default setup, the <see cref="UseWithGraphAttribute"/> is not required.
-    /// However, when a graph doesn't use <see cref="GraphOptions.AutoIncludeNodesFromGraphAssembly"/> or when compatibility needs to be restricted
-    /// more explicitly, this attribute must be used to declare which <see cref="Graph"/> types support the node.
+    /// However, when a graph uses <see cref="GraphOptions.DisableAutoInclusionOfNodesFromGraphAssembly "/>, this attribute must be used to declare which <see cref="Graph"/> types support the node.
     /// <br/>
     /// <br/>
     /// This attribute affects editor behaviors such as graph item library population and helps prevent the accidental use of unsupported nodes.

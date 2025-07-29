@@ -173,9 +173,9 @@ namespace Unity.GraphToolkit.Editor
             if (evt.menu.MenuItems().Count != 0)
                 evt.menu.AppendSeparator();
 
-            evt.menu.AppendAction(L10n.Tr("Add Global Transition"), _ =>
+            evt.menu.AppendAction(L10n.Tr("Add Local Transition"), _ =>
             {
-                GraphView.Dispatch(new CreateSingleStateTransitionSupportCommand(GraphView.GraphModel, StateModel, TransitionSupportKind.Global));
+                GraphView.Dispatch(new CreateSingleStateTransitionSupportCommand(GraphView.GraphModel, StateModel, TransitionSupportKind.Local));
             });
 
             evt.menu.AppendAction(L10n.Tr("Add Entry Transition"), _ =>

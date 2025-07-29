@@ -10,6 +10,8 @@
 
     --override-bar: #090909;
 
+    --button-add-more: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/Add@2x.png");
+
     /*ErrorMarker.uss*/
     --graph-color-error: #B10C0C;
     --graph-color-warning: #C99700;
@@ -49,13 +51,13 @@
     /*Wire.uss*/
     --graph-color-wire: #555555;
     --graph-color-wire-ghost: #555555;
-    --graph-global-transition-icon: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_AnyStateTransition@256.png");
-    --graph-global-transition-icon-selected: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_AnyStateTransition@256.png");
+    --graph-local-transition-icon: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_AnyStateTransition@256.png");
+    --graph-local-transition-icon-selected: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_AnyStateTransition@256.png");
     --graph-self-transition-icon: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/SelfTransition@256.png");
     --graph-self-transition-icon-selected: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/SelfTransition@256.png");
     --graph-on-enter-transition-icon: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_OnEnterTransition@256.png");
     --graph-on-enter-transition-icon-selected: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/d_OnEnterTransition@256.png");
-    --graph-color-global-transition-arrow-fill: #00876A;
+    --graph-color-local-transition-arrow-fill: #00876A;
     --graph-color-self-transition-arrow-fill: var(--graph-color-block-background);
     --graph-color-on-enter-transition-arrow-fill: var(--graph-color-enter-state-background);
 
@@ -109,7 +111,7 @@
 
     --transition-to-state-tint: #555555;
     --transition-state-on-enter: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/OnEnterTransition.png");
-    --transition-state-global: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/AnyStateTransition.png");
+    --transition-state-local: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/AnyStateTransition.png");
     --transition-state-self: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/SelfTransition.png");
 
     --transition-debug-true: resource("Packages/com.unity.graphtoolkit/GraphToolkitEditor/Icons/StateMachine/Transitions/TrueDebugging.png");

@@ -286,9 +286,9 @@ namespace Unity.GraphToolkit.Editor
             {
                 m_TitleLabel.SetValueWithoutNotify(TransitionSupportModel.Title);
             }
-            else if (TransitionSupportModel.TransitionSupportKind is TransitionSupportKind.Global or TransitionSupportKind.OnEnter)
+            else if (TransitionSupportModel.TransitionSupportKind is TransitionSupportKind.Local or TransitionSupportKind.OnEnter)
             {
-                m_TitleLabel.SetValueWithoutNotify((TransitionSupportModel.TransitionSupportKind == TransitionSupportKind.Global ? "GLOBAL \u2192 " : "ON ENTER \u2192 ") + TransitionSupportModel.ToPort.NodeModel.Title);
+                m_TitleLabel.SetValueWithoutNotify((TransitionSupportModel.TransitionSupportKind == TransitionSupportKind.Local ? "LOCAL \u2192 " : "ON ENTER \u2192 ") + TransitionSupportModel.ToPort.NodeModel.Title);
             }
             else
             {
@@ -304,7 +304,7 @@ namespace Unity.GraphToolkit.Editor
             UpdateTitleFromModel();
             string iconUssClassName = iconUssName.WithUssModifier(TransitionSupportModel.TransitionSupportKind switch
             {
-                TransitionSupportKind.Global => "global",
+                TransitionSupportKind.Local => "local",
                 TransitionSupportKind.Self => "self",
                 TransitionSupportKind.OnEnter => "on-enter",
                 TransitionSupportKind.StateToState => "to-state",

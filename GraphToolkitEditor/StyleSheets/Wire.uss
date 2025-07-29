@@ -90,13 +90,13 @@
     --arrow-length: 35;
 }
 
-.ge-transition--global > .ge-transition-arrow--long,
+.ge-transition--local > .ge-transition-arrow--long,
 .ge-transition--self > .ge-transition-arrow--long,
 .ge-transition--on-enter > .ge-transition-arrow--long {
     --arrow-length: 53;
 }
 
-.ge-transition--global > .ge-transition-arrow--short,
+.ge-transition--local > .ge-transition-arrow--short,
 .ge-transition--self > .ge-transition-arrow--short,
 .ge-transition--on-enter > .ge-transition-arrow--short {
     --arrow-length: 39;
@@ -124,20 +124,20 @@
     -unity-text-align: middle-center;
 }
 
-.ge-transition--global .ge-transition-arrow {
+.ge-transition--local .ge-transition-arrow {
     --wire-width: 1;
-    --arrow-fill-color: var(--graph-color-global-transition-arrow-fill);
+    --arrow-fill-color: var(--graph-color-local-transition-arrow-fill);
 }
 
-.ge-transition--global .ge-transition-arrow__transition-icon {
-    background-image: var(--graph-global-transition-icon);
+.ge-transition--local .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-local-transition-icon);
 }
 
-.ge-transition--global:checked .ge-transition-arrow__transition-icon {
-    background-image: var(--graph-global-transition-icon-selected);
+.ge-transition--local:checked .ge-transition-arrow__transition-icon {
+    background-image: var(--graph-local-transition-icon-selected);
 }
 
-.ge-transition--global .ge-transition-counter__label {
+.ge-transition--local .ge-transition-counter__label {
     color: var(--graph-color-enter-state-label-color);
 }
 

@@ -61,6 +61,9 @@ namespace Unity.GraphToolkit.Editor
         /// </summary>
         public BlockNodeView()
         {
+            // Excluse blocks from tab navigation as users should navigate from property fields to property fields.
+            tabIndex = -1;
+
             generateVisualContent += OnGenerateVisualContent;
             RegisterCallback<MouseDownEvent>(OnMouseDown);
             RegisterCallback<MouseUpEvent>(OnMouseUp);

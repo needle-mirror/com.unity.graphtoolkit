@@ -309,7 +309,7 @@ namespace Unity.GraphToolkit.Editor.Implementation
                 return true;
             }
             var attribute = graphType.GetCustomAttribute<GraphAttribute>();
-            if (attribute?.options.HasFlag(GraphOptions.AutoIncludeNodesFromGraphAssembly) == true && node.GetType().Assembly == graphType.Assembly)
+            if (attribute?.options.HasFlag(GraphOptions.DisableAutoInclusionOfNodesFromGraphAssembly) == false && node.GetType().Assembly == graphType.Assembly)
             {
                 return true;
             }

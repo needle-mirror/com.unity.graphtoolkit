@@ -44,5 +44,14 @@ namespace Unity.GraphToolkit.Editor
 
             return true;
         }
+
+        public static void AppendMenuItemFromShortcutWithName<T>(this DropdownMenu self, GraphTool tool, string customName, Action<DropdownMenuAction> action, DropdownMenuAction.Status status = DropdownMenuAction.Status.Normal)  where T : ShortcutEventBase<T>, new()
+        {
+            var shortcutString = tool != null ? ShortcutEventBase<T>.GetMenuItemShortcutString(tool) : null;
+
+            var fullItemName = string.IsNullOrEmpty(shortcutString) ? customName : $"{customName} {shortcutString}";
+
+            self.AppendAction(fullItemName, action, status);
+        }
     }
 }

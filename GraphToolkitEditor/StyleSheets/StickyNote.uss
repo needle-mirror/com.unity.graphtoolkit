@@ -16,6 +16,10 @@
     --lod-min-text-size: 12;
 }
 
+.ge-sticky-note .ge-editable-title-part {
+    align-items: stretch;
+}
+
 .ge-sticky-note__text-container {
     margin: 0 5px 5px 5px;
     flex-grow: 1;
@@ -140,7 +144,7 @@
 
 /* Sizes */
 .ge-sticky-note--size-small .ge-sticky-note__title-container {
-    min-height: 26px;
+    min-height: 30px;
     --wanted-text-size: 20;
 }
 

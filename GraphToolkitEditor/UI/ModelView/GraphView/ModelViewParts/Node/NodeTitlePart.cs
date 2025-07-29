@@ -204,6 +204,8 @@ namespace Unity.GraphToolkit.Editor
 
             TitleContainer.RegisterCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved);
 
+            // Exclude the EditableLabel from tab navigation as users should navigate from property fields to property fields.
+            TitleLabel.tabIndex = -1;
             container.Add(m_Root);
         }
 
@@ -283,10 +285,7 @@ namespace Unity.GraphToolkit.Editor
                 CoroutineProgressBar.value = hasProgressNode.Progress;
             }
 
-            if (m_ColorLine != null && visitor.ChangeHints.HasChange(ChangeHint.Style) && nodeModel is IHasElementColor hasElementColor)
-            {
-                m_ColorLine.style.backgroundColor = hasElementColor.ElementColor.HasUserColor ? hasElementColor.ElementColor.Color : nodeModel.DefaultColor;
-            }
+            UpdateLineColorFromModel(visitor, nodeModel);
 
             if (visitor.ChangeHints.HasChange(ChangeHint.Data))
             {
@@ -307,6 +306,31 @@ namespace Unity.GraphToolkit.Editor
             var currentMode = nodeModeModel.Modes[nodeModeModel.CurrentModeIndex];
             if (currentMode != null && m_ModeDropdownButton.value != currentMode)
                 m_ModeDropdownButton.SetValueWithoutNotify(currentMode);
+        }
+
+        /// <summary>
+        /// When handling a style change for a node, this method updates the color line based on the model's color.
+        /// </summary>
+        /// <param name="visitor"></param>
+        /// <param name="nodeModel"></param>
+        /// <returns>Returns true if the ColorLine's background color is set</returns>
+        private protected virtual bool UpdateLineColorFromModel(UpdateFromModelVisitor visitor, AbstractNodeModel nodeModel)
+        {
+            if (m_ColorLine == null)
+                return false;
+
+            if (visitor.ChangeHints.HasChange(ChangeHint.Style))
+            {
+                if (nodeModel.ElementColor.HasUserColor)
+                {
+                    m_ColorLine.style.backgroundColor = nodeModel.ElementColor.Color;
+                    return true;
+                }
+
+                m_ColorLine.style.backgroundColor = nodeModel.DefaultColor;
+            }
+
+            return false;
         }
 
         public static Image CreateMissingWarningIcon()
@@ -378,6 +402,19 @@ namespace Unity.GraphToolkit.Editor
                     TitleContainer.Add(titlegroup);
                 }
             }
+        }
+
+        public class TestAccess
+        {
+            public readonly NodeTitlePart nodeTitlePart;
+
+            public TestAccess(NodeTitlePart nodeTitlePart)
+            {
+                this.nodeTitlePart = nodeTitlePart;
+            }
+
+            public bool UpdateLineColorFromModel(UpdateFromModelVisitor visitor, AbstractNodeModel nodeModel) => nodeTitlePart.UpdateLineColorFromModel(visitor, nodeModel);
+            public void BuildUI(VisualElement container) => nodeTitlePart.BuildUI(container);
         }
     }
 }

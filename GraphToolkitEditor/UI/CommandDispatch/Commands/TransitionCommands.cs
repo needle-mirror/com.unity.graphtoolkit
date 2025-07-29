@@ -24,7 +24,7 @@ namespace Unity.GraphToolkit.Editor
 
         /// <summary>
         /// The type of transition to create. Must be one of the following:
-        /// - <see cref="TransitionSupportKind.Global"/>
+        /// - <see cref="TransitionSupportKind.Local"/>
         /// - <see cref="TransitionSupportKind.Self"/>
         /// - <see cref="TransitionSupportKind.OnEnter"/>
         /// </summary>
@@ -43,7 +43,7 @@ namespace Unity.GraphToolkit.Editor
             Kind = kind;
             UndoString = kind switch
             {
-                TransitionSupportKind.Global => "Create Global Transition",
+                TransitionSupportKind.Local => "Create Local Transition",
                 TransitionSupportKind.OnEnter => "Create On Enter Transition",
                 TransitionSupportKind.Self => "Create Self Transition",
                 _ => throw new ArgumentException("Invalid transition type", nameof(kind))

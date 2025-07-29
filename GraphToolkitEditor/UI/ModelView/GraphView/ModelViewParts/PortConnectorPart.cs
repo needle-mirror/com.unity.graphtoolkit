@@ -199,7 +199,11 @@ namespace Unity.GraphToolkit.Editor
                 m_CreateFromPortHitBox.BringToFront();
             }
 
-            m_Root.schedule.Execute(UpdateHitBox).ExecuteLater(0);
+            m_Root.RegisterCallbackOnce<GeometryChangedEvent>(evt =>
+            {
+                UpdateHitBox();
+            });
+
             container.Add(m_Root);
         }
 

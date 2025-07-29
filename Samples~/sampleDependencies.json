@@ -1,0 +1,12 @@
+{
+  "SharedAssetDependencies": [],
+  "SharedPackageDependencies": [],
+  "SampleEntries": [
+    {
+      "Path": "VisualNovelDirector",
+      "AssetDependencies": [  ],
+      "PackageDependencies": ["com.unity.inputsystem", "com.unity.ugui"],
+      "Message": "The Visual Novel Director sample requires the TextMeshPro essentials. Install by clicking Window->TextMeshPro->Import TMP Essential Resources"
+    }
+  ]
+}

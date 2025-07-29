@@ -286,7 +286,7 @@ namespace Unity.GraphToolkit.Editor
             if (wrapper != null)
             {
                 wrapper.hideFlags = HideFlags.DontUnloadUnusedAsset | HideFlags.DontSave;
-                wrapper.Owner = ownerModel;
+                wrapper.Owner = owner;
                 wrapper.CommandTarget = commandTarget;
                 wrapper.WrappedObject = constant;
                 wrapper.Value = constant.ObjectValue ?? constant.DefaultValue;
@@ -355,6 +355,16 @@ namespace Unity.GraphToolkit.Editor
                     }
                 }
             }
+        }
+
+        internal class TestAccess
+        {
+            // ReSharper disable once MemberHidesStaticFromOuterClass
+            public static FieldWrapper GetOrCreateConstantWrapper(Constant constant, GraphElementModel owner, ICommandTarget commandTarget) =>
+                CustomPropertyDrawerAdapter.GetOrCreateConstantWrapper(constant, owner, commandTarget);
+
+            // ReSharper disable once MemberHidesStaticFromOuterClass
+            public static Type GetOrCreateWrapperType(Type valueType) => CustomPropertyDrawerAdapter.GetOrCreateWrapperType(valueType);
         }
     }
 }

@@ -50,7 +50,7 @@ class GtkNodeExamples
 
         protected override void OnDefineOptions(INodeOptionDefinition context)
         {
-            context.AddNodeOption<int>("Port Count", k_PortCountName,
+            context.AddNodeOption<int>(k_PortCountName, "Port Count",
                 defaultValue: 2, attributes: new [] { new DelayedAttribute() });
         }
         #endregion

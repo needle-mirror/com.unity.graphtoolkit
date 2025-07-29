@@ -14,11 +14,11 @@ namespace Unity.GraphToolkit.Editor
     /// </remarks>
     /// <example>
     /// <code>
-    /// [Graph(".mygraph", GraphOptions.Default | GraphOptions.SupportsSubgraphs)]
+    /// [Graph(".mygraph", GraphOptions.SupportsSubgraphs)]
     /// public class MyGraph : Graph { }
     /// </code>
     /// <para>
-    /// This example keeps the default behavior and adds support for subgraphs by combining <see cref="GraphOptions.Default"/> with <see cref="GraphOptions.SupportsSubgraphs"/>.
+    /// This example keeps the default behavior and adds support for subgraphs by enabling <see cref="GraphOptions.SupportsSubgraphs"/>.
     /// </para>
     /// </example>
     [Flags]
@@ -33,22 +33,26 @@ namespace Unity.GraphToolkit.Editor
         SupportsSubgraphs = 1<<0,
 
         /// <summary>
-        /// Indicates that user-defined nodes (i.e., subclasses of <see cref="Node"/>) located in the same assembly as the graph will be automatically added to the graph item library.
+        /// Indicates that nodes (i.e., subclasses of <see cref="Node"/>) defined in the same assembly as the graph are not automatically added to the graph item library.
         /// </summary>
         /// <remarks>
-        /// This makes it easier to discover nodes without needing to manually annotate each one with <see cref="UseWithGraphAttribute"/>.
-        /// Developers who want full control over what appears in the graph item library might choose to disable this option.
+        /// By default, this flag is disabled. This allows you to discover nodes without manually annotating each one with <see cref="UseWithGraphAttribute"/>.
+        /// Developers who want full control over what appears in the graph item library might choose to enable this option.
         /// </remarks>
-        AutoIncludeNodesFromGraphAssembly = 1<<2,
+        DisableAutoInclusionOfNodesFromGraphAssembly = 1<<1,
+
+        // -------------
+        // If you're adding a new flag, make sure the default is 'false'. This ensures that the user
+        // doesn't override defaults by mistake when setting one or more other flags for their graph options.
 
         /// <summary>
-        /// The default graph configuration. It currently includes <see cref="AutoIncludeNodesFromGraphAssembly"/>.
+        /// The default graph configuration.
         /// </summary>
         /// <remarks>
         /// This default is helpful for onboarding: if users forget to mark nodes with <see cref="UseWithGraphAttribute"/>, they will still appear in the graph item library
         /// as long as they are defined in the same assembly as the graph.
         /// </remarks>
-        Default = AutoIncludeNodesFromGraphAssembly,
+        Default = 0,
 
         /// <summary>
         /// No graph options enabled.

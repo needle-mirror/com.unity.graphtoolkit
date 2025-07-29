@@ -248,7 +248,7 @@ namespace Unity.GraphToolkit.Editor
 
             if ((evt.target as VisualElement)?.GetFirstOfType<BlockNodeView>() == null)
             {
-                evt.menu.AppendAction("Create Block",
+                evt.menu.AppendMenuItemFromShortcutWithName<ShortcutShowItemLibraryEvent>(GraphView.GraphTool,  "Create Block",
                     action =>
                     {
                         var mousePosition = action?.eventInfo?.mousePosition ?? evt.mousePosition;

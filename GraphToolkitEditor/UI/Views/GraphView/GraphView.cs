@@ -414,13 +414,13 @@ namespace Unity.GraphToolkit.Editor
 
                 RegisterCallback<ShortcutFrameAllEvent>(OnShortcutFrameAllEvent);
                 RegisterCallback<ShortcutFrameOriginEvent>(OnShortcutFrameOriginEvent);
-                RegisterCallback<ShortcutDeleteEvent>(OnShortcutDeleteEvent);
                 RegisterCallback<ShortcutShowItemLibraryEvent>(OnShortcutShowItemLibraryEvent);
                 RegisterCallback<ShortcutConvertConstantAndVariableEvent>(OnShortcutConvertVariableAndConstantEvent);
                 // TODO OYT (GTF-804): For V1, access to the Align Items and Align Hierarchy features was removed as they are confusing to users. To be improved before making them accessible again.
                 // RegisterCallback<ShortcutAlignNodesEvent>(OnShortcutAlignNodesEvent);
                 // RegisterCallback<ShortcutAlignNodeHierarchiesEvent>(OnShortcutAlignNodeHierarchyEvent);
                 RegisterCallback<ShortcutCreateStickyNoteEvent>(OnShortcutCreateStickyNoteEvent);
+                RegisterCallback<ShortcutCreatePlacematEvent>(OnShortcutCreatePlacematEvent);
                 RegisterCallback<KeyDownEvent>(OnRenameKeyDown);
             }
             else
@@ -884,20 +884,20 @@ namespace Unity.GraphToolkit.Editor
                 var selectedGraphElements = selection.Where(t => !(t is WireModel)).Select(m => m.GetView<GraphElement>(this)).Where(v => v != null && v.visible).ToList();
                 if (selection.Count != 1 || selection[0] is not PlacematModel)
                 {
-                    evt.menu.AppendAction("Create Node", menuAction =>
+                    evt.menu.AppendMenuItemFromShortcutWithName<ShortcutShowItemLibraryEvent>(GraphTool, "Create Node", menuAction =>
                     {
                         Vector2 mousePosition = menuAction?.eventInfo?.mousePosition ?? Event.current.mousePosition;
                         ShowItemLibrary(mousePosition);
                     });
 
-                    evt.menu.AppendAction("Create Placemat", menuAction =>
+                    evt.menu.AppendMenuItemFromShortcut<ShortcutCreatePlacematEvent>( GraphTool, menuAction =>
                     {
                         Vector2 mousePosition = menuAction?.eventInfo?.mousePosition ?? Event.current.mousePosition;
                         Vector2 graphPosition = ContentViewContainer.WorldToLocal(mousePosition);
 
                         CreatePlacematFromGraphElements(selectedGraphElements, graphPosition);
                     });
-                    evt.menu.AppendAction("Create Sticky Note", menuAction =>
+                    evt.menu.AppendMenuItemFromShortcut<ShortcutCreateStickyNoteEvent>( GraphTool, menuAction =>
                     {
                         Vector2 mousePosition = menuAction?.eventInfo?.mousePosition ?? Event.current.mousePosition;
                         Vector2 graphPosition = ContentViewContainer.WorldToLocal(mousePosition);
@@ -1008,8 +1008,7 @@ namespace Unity.GraphToolkit.Editor
                     if (variableNodes.Count > 0)
                     {
                         // TODO JOCE We might want to bring the concept of Get/Set variable from VS down to GTF
-                        var itemName = ShortcutHelper.CreateShortcutMenuItemEntry("Variable/Convert", GraphTool.Name, ShortcutConvertConstantAndVariableEvent.id);
-                        evt.menu.AppendAction(itemName,
+                        evt.menu.AppendMenuItemFromShortcutWithName<ShortcutConvertConstantAndVariableEvent>(GraphTool, "Variable/Convert",
                             _ => Dispatch(new ConvertConstantNodesAndVariableNodesCommand(null, variableNodes)),
                             variableNodes.Any(v => v.CanConvertToConstant()) ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
 
@@ -1020,9 +1019,8 @@ namespace Unity.GraphToolkit.Editor
 
                     if (constants.Count > 0)
                     {
-                        var itemName = ShortcutHelper.CreateShortcutMenuItemEntry("Constant/Convert", GraphTool.Name, ShortcutConvertConstantAndVariableEvent.id);
-                        evt.menu.AppendAction(itemName,
-                            _ => Dispatch(new ConvertConstantNodesAndVariableNodesCommand(constants, null)), _ => DropdownMenuAction.Status.Normal);
+                        evt.menu.AppendMenuItemFromShortcutWithName<ShortcutConvertConstantAndVariableEvent>(GraphTool, "Constant/Convert",
+                            _ => Dispatch(new ConvertConstantNodesAndVariableNodesCommand(constants, null)));
 
                         evt.menu.AppendAction("Constant/Itemize",
                             _ => Dispatch(new ItemizeNodeCommand(constants.OfType<ISingleOutputPortNodeModel>().ToList())),
@@ -1797,66 +1795,6 @@ namespace Unity.GraphToolkit.Editor
         }
 
         /// <summary>
-        /// Callback for the ShortcutDeleteEvent.
-        /// </summary>
-        /// <param name="e">The event.</param>
-        protected void OnShortcutDeleteEvent(ShortcutDeleteEvent e)
-        {
-            var selectedNodes = new List<AbstractNodeModel>();
-            var selection = GetSelection();
-            for (var i = 0; i < selection.Count; i++)
-            {
-                var model = selection[i];
-                if (model is AbstractNodeModel abstractNodeModel)
-                {
-                    selectedNodes.Add(abstractNodeModel);
-                }
-            }
-
-            if (selectedNodes.Count == 0)
-                return;
-
-            var connectedNodes = new List<InputOutputPortsNodeModel>();
-            foreach (var selectedNode in selectedNodes)
-            {
-                if (selectedNode is InputOutputPortsNodeModel inputOutputPortsNodeModel)
-                {
-                    var inputConnected = false;
-                    var outputConnected = false;
-                    foreach (var portModel in inputOutputPortsNodeModel.InputsById.Values)
-                    {
-                        if (portModel.IsConnected())
-                        {
-                            inputConnected = true;
-                            break;
-                        }
-                    }
-                    foreach (var portModel in inputOutputPortsNodeModel.OutputsById.Values)
-                    {
-                        if (portModel.IsConnected())
-                        {
-                            outputConnected = true;
-                            break;
-                        }
-                    }
-
-                    if (inputConnected && outputConnected)
-                    {
-                        connectedNodes.Add(inputOutputPortsNodeModel);
-                    }
-                }
-            }
-
-            var canSelectionBeBypassed = connectedNodes.Count > 0;
-            if (canSelectionBeBypassed && GraphModel.AllowNodeBypass)
-                Dispatch(new BypassNodesCommand(connectedNodes, selectedNodes));
-            else
-                Dispatch(new DeleteElementsCommand(selectedNodes));
-
-            e.StopPropagation();
-        }
-
-        /// <summary>
         /// Callback for the <see cref="ShortcutShowItemLibraryEvent"/>.
         /// </summary>
         /// <param name="e">The event.</param>
@@ -1872,10 +1810,23 @@ namespace Unity.GraphToolkit.Editor
         /// <param name="e">The event.</param>
         protected void OnShortcutConvertVariableAndConstantEvent(ShortcutConvertConstantAndVariableEvent e)
         {
-            var constantModels = GetSelection().OfType<ConstantNodeModel>().ToList();
-            var variableModels = GetSelection().OfType<VariableNodeModel>().ToList();
+            using var dispose = ListPool<VariableNodeModel>.Get(out var variableModels);
+            using var dispose2 = ListPool<ConstantNodeModel>.Get(out var constantModels);
 
-            if (constantModels.Any() || variableModels.Any())
+            foreach (var selected in GetSelection())
+            {
+                switch(selected)
+                {
+                    case ConstantNodeModel constantModel:
+                        constantModels.Add(constantModel);
+                        break;
+                    case VariableNodeModel variableModel when variableModel.CanConvertToConstant():
+                        variableModels.Add(variableModel);
+                        break;
+                }
+            }
+
+            if (constantModels.Count > 0 || variableModels.Count > 0)
             {
                 Dispatch(new ConvertConstantNodesAndVariableNodesCommand(constantModels, variableModels));
                 e.StopPropagation();
@@ -1913,6 +1864,35 @@ namespace Unity.GraphToolkit.Editor
             var atPosition = new Rect(this.ChangeCoordinatesTo(ContentViewContainer, this.WorldToLocal(e.MousePosition)), StickyNote.defaultSize);
             Dispatch(new CreateStickyNoteCommand(atPosition));
             e.StopPropagation();
+        }
+
+        /// <summary>
+        /// Callback for the ShortcutCreateStickyNoteEvent.
+        /// </summary>
+        /// <param name="e">The event.</param>
+        protected void OnShortcutCreatePlacematEvent(ShortcutCreatePlacematEvent e)
+        {
+            using var dispose = ListPool<GraphElement>.Get( out var selectedGraphElements);
+
+            foreach (var selection in GetSelection())
+            {
+                if( selection is not WireModel)
+                {
+                    var graphElement = selection.GetView<GraphElement>(this);
+                    if( graphElement != null && graphElement.visible)
+                        selectedGraphElements.Add(graphElement);
+                }
+            }
+
+            if (selectedGraphElements.Count != 1 || selectedGraphElements[0].Model is not PlacematModel)
+            {
+                Vector2 mousePosition = e.MousePosition;
+                Vector2 graphPosition = ContentViewContainer.WorldToLocal(mousePosition);
+
+                CreatePlacematFromGraphElements(selectedGraphElements, graphPosition);
+
+                e.StopPropagation();
+            }
         }
 
         /// <summary>
@@ -2130,7 +2110,7 @@ namespace Unity.GraphToolkit.Editor
             if (GraphModel == null)
                 return;
 
-            var focusedElement = panel.focusController.focusedElement as VisualElement;
+            var focusedElement = panel?.focusController?.focusedElement as VisualElement;
             while (focusedElement != null && !(focusedElement is ModelView))
             {
                 focusedElement = focusedElement.parent;

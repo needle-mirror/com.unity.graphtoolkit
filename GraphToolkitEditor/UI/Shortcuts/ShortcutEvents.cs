@@ -31,18 +31,6 @@ namespace Unity.GraphToolkit.Editor
     }
 
     /// <summary>
-    /// An event sent by the Delete shortcut.
-    /// </summary>
-    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
-    [UnityRestricted]
-    internal class ShortcutDeleteEvent : ShortcutEventBase<ShortcutDeleteEvent>
-    {
-        public const string id = "Delete";
-        const KeyCode k_KeyCode = KeyCode.Backspace;
-        const ShortcutModifiers k_Modifiers = ShortcutModifiers.None;
-    }
-
-    /// <summary>
     /// An event sent by the Show Item Library shortcut.
     /// </summary>
     [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
@@ -62,8 +50,8 @@ namespace Unity.GraphToolkit.Editor
     internal class ShortcutConvertConstantAndVariableEvent : ShortcutEventBase<ShortcutConvertConstantAndVariableEvent>
     {
         public const string id = "Convert Variable And Constant";
-        const KeyCode k_KeyCode = KeyCode.C;
-        const ShortcutModifiers k_Modifiers = ShortcutModifiers.None;
+        const KeyCode k_KeyCode = KeyCode.T;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Control | ShortcutModifiers.Shift;
     }
 
     /* TODO OYT (GTF-804): For V1, access to the Align Items and Align Hierarchy features was removed as they are confusing to users. To be improved before making them accessible again.
@@ -93,11 +81,23 @@ namespace Unity.GraphToolkit.Editor
     /// <summary>
     /// An event sent by the Create Sticky Note.
     /// </summary>
-    [ToolShortcutEvent(null, id)]
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
     [UnityRestricted]
     internal class ShortcutCreateStickyNoteEvent : ShortcutEventBase<ShortcutCreateStickyNoteEvent>
     {
         public const string id = "Create Sticky Note";
+        const KeyCode k_KeyCode = KeyCode.BackQuote;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Alt;
+    }
+
+    /// <summary>
+    /// An event sent by the Create Sticky Note.
+    /// </summary>
+    [ToolShortcutEvent(null, id)]
+    [UnityRestricted]
+    internal class ShortcutCreatePlacematEvent : ShortcutEventBase<ShortcutCreatePlacematEvent>
+    {
+        public const string id = "Create Placemat";
     }
 
     /// <summary>

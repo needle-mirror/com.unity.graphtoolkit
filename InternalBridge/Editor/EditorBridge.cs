@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEditor.PackageManager.UI;
 using UnityEditor.ShortcutManagement;
 using UnityEditor.Utils;
 using UnityEngine;
@@ -107,5 +108,7 @@ namespace Unity.GraphToolsAuthoringFramework.InternalEditorBridge
             var drawerType = ScriptAttributeUtility.GetDrawerTypeForType(type, null);
             return typeof(PropertyDrawer).IsAssignableFrom(drawerType);
         }
+
+        public static bool PackageManagerUIOpen() => PackageManagerWindow.instance != null;
     }
 }

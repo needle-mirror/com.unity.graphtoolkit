@@ -51,7 +51,7 @@ namespace Unity.GraphToolkit.Editor.Implementation
             if (evt.menu.MenuItems().Count > 0)
                 evt.menu.AppendSeparator();
 
-            if (GraphModel is GraphModelImp graphModel)
+            if (GraphModel is GraphModelImp {Graph : not null} graphModel )
             {
                 var subGraphTypes = PublicGraphFactory.GetSubGraphTypes(graphModel.Graph.GetType());
 

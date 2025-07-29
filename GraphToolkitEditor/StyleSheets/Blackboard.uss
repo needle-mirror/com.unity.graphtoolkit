@@ -37,12 +37,12 @@
 /*              Header              */
 
 .ge-blackboard__header {
-    margin: 4px 0 2px;
+    margin: 4px 0 0;
     padding: 4px;
 }
 
 .ge-blackboard-toolbar-part__toolbar {
-    padding-top: 10px;
+    padding-top: 4px;
     flex-direction: row;
 }
 
@@ -57,11 +57,13 @@
 }
 
 .ge-blackboard-toolbar-part__add-button {
+    background-image: var(--button-add-more);
+    border-color: transparent;
     font-size : 24px;
     height: 24px;
     width: 32px;
     margin-right: 1px;
-    padding-bottom: 5px;
+    background-size: 75% 95%;
 }
 
 .ge-blackboard-toolbar-part__menu-button {

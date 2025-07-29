@@ -71,6 +71,25 @@ namespace Unity.GraphToolkit.Editor
             return default;
         }
 
+        internal static string GetMenuItemShortcutString(GraphTool tool)
+        {
+            var attribute = typeof(T).GetCustomAttribute<ToolShortcutEventAttribute>();
+            if (attribute != null && (attribute.ToolName == null || attribute.ToolName == tool.Name))
+            {
+                string bindingString = null;
+                try
+                {
+                    bindingString = ShortcutManager.instance.GetShortcutBinding(tool.Name + "/" + attribute.Identifier).GetShortcutMenuString();
+                }
+                catch (ArgumentException ) // ShortcutManager throws if it can't find the shortcut
+                {
+                }
+                return bindingString;
+            }
+
+            return null;
+        }
+
         internal static string GetMenuItemName(GraphTool tool)
         {
             var attribute = typeof(T).GetCustomAttribute<ToolShortcutEventAttribute>();
