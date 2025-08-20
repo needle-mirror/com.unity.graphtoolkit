@@ -57,7 +57,7 @@ namespace Unity.GraphToolsAuthoringFramework.InternalEditorBridge
                 m_FilePath = sourceInfo.filePath;
                 m_LineNumber = sourceInfo.lineNumber;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 m_FilePath = null;
                 m_LineNumber = -1;

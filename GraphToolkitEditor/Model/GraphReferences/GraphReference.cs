@@ -109,7 +109,11 @@ namespace Unity.GraphToolkit.Editor
             // Try to rebind the graph object using the instance ID if the object is not loaded.
             if (graphObject == null && graphReference.m_GraphObjectInstanceID != InstanceIDNone)
             {
+#if UNITY_6000_3_OR_NEWER
+                graphObject = EditorUtility.EntityIdToObject(graphReference.m_GraphObjectInstanceID) as GraphObject;
+#else
                 graphObject = EditorUtility.InstanceIDToObject(graphReference.m_GraphObjectInstanceID) as GraphObject;
+#endif
             }
             return graphObject?.GetGraphModelByGuid(graphReference.m_GraphModelGuid);
         }
@@ -148,7 +152,11 @@ namespace Unity.GraphToolkit.Editor
             }
             else if( m_GraphObjectInstanceID != InstanceIDNone)
             {
+#if UNITY_6000_3_OR_NEWER
+                return EditorUtility.EntityIdToObject(m_GraphObjectInstanceID) as GraphObject;
+#else
                 return EditorUtility.InstanceIDToObject(m_GraphObjectInstanceID) as GraphObject;
+#endif
             }
 
             return null;

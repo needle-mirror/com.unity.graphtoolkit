@@ -10,8 +10,12 @@ namespace Unity.GraphToolkit.Editor
     [UnityRestricted]
     internal class ProgressBarPart : BaseModelViewPart
     {
+        const float k_DefaultDebugAlpha = 1f;
         public static readonly string ussClassName = "ge-node-progress-bar";
         public static readonly string progressBarName = "progress";
+
+        static readonly CustomStyleProperty<float> k_DebugBackgroundAlphaProperty = new("--debug-background-alpha");
+        float m_DebugBackgroundAlpha = k_DefaultDebugAlpha;
 
         VisualElement m_Root;
         VisualElement m_Progress;
@@ -49,10 +53,11 @@ namespace Unity.GraphToolkit.Editor
         protected override void BuildUI(VisualElement container)
         {
             m_Root = new VisualElement { name = PartName, pickingMode = PickingMode.Ignore };
+            m_Root.RegisterCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved);
             m_Root.AddToClassList(ussClassName);
             m_Root.AddToClassList(m_ParentClassName.WithUssElement(PartName));
 
-            m_Progress = new VisualElement {name = progressBarName};
+            m_Progress = new VisualElement { name = progressBarName };
             m_Progress.AddToClassList(ussClassName.WithUssElement(progressBarName));
             m_Progress.AddToClassList(m_ParentClassName.WithUssElement(progressBarName));
             m_Root.Add(m_Progress);
@@ -95,8 +100,20 @@ namespace Unity.GraphToolkit.Editor
             m_Progress.style.width = new StyleLength(Length.Percent(value * 100));
             m_Progress.visible = shouldDisplay;
 
+            var color = m_Root.resolvedStyle.backgroundColor;
+            if (color != Color.clear)
+            {
+                color.a = shouldDisplay ? m_DebugBackgroundAlpha : 1f;
+                m_Root.style.backgroundColor = color;
+            }
+
             m_CurrentValue = value;
             m_Displayed = shouldDisplay;
+        }
+
+        void OnCustomStyleResolved(CustomStyleResolvedEvent evt)
+        {
+            m_DebugBackgroundAlpha = evt.customStyle.TryGetValue(k_DebugBackgroundAlphaProperty, out float alpha) ? alpha : k_DefaultDebugAlpha;
         }
     }
 }

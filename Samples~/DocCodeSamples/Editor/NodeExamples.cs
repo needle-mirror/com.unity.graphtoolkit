@@ -48,10 +48,12 @@ class GtkNodeExamples
         #region PortCountOption
         const string k_PortCountName = "PortCount";
 
-        protected override void OnDefineOptions(INodeOptionDefinition context)
+        protected override void OnDefineOptions(IOptionDefinitionContext context)
         {
-            context.AddNodeOption<int>(k_PortCountName, "Port Count",
-                defaultValue: 2, attributes: new [] { new DelayedAttribute() });
+            context.AddOption<int>(k_PortCountName)
+                .WithDisplayName("Port Count")
+                .WithDefaultValue(2)
+                .Delayed();
         }
         #endregion
 
@@ -81,9 +83,9 @@ class GtkNodeExamples
 
         const string k_PortTypeName = "PortType";
 
-        protected override void OnDefineOptions(INodeOptionDefinition context)
+        protected override void OnDefineOptions(IOptionDefinitionContext context)
         {
-            context.AddNodeOption<PortTypes>(k_PortTypeName, "Port Type");
+            context.AddOption<PortTypes>(k_PortTypeName).WithDisplayName("Port Type");
         }
 
         protected override void OnDefinePorts(IPortDefinitionContext context)
@@ -116,11 +118,13 @@ class GtkNodeExamples
         const string k_PortCountName = "PortCount";
         const string k_PortTypeName = "PortType";
 
-        protected override void OnDefineOptions(INodeOptionDefinition context)
+        protected override void OnDefineOptions(IOptionDefinitionContext context)
         {
-            context.AddNodeOption<int>(k_PortCountName,"Port Count",
-                defaultValue: 2, attributes: new [] { new DelayedAttribute() });
-            context.AddNodeOption<PortTypes>(k_PortTypeName, "Port Type");
+            context.AddOption<int>(k_PortCountName)
+                .WithDisplayName("Port Count")
+                .WithDefaultValue(2)
+                .Delayed();
+            context.AddOption<PortTypes>(k_PortTypeName);
         }
 
         protected override void OnDefinePorts(IPortDefinitionContext context)

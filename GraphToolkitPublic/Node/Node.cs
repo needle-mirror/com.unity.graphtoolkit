@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unity.GraphToolkit.Editor.Implementation;
-using UnityEngine;
 
 namespace Unity.GraphToolkit.Editor
 {
@@ -34,6 +33,60 @@ namespace Unity.GraphToolkit.Editor
     [Serializable]
     public abstract partial class Node : INode
     {
+        /// <summary>
+        /// Interface that provides methods to declare node options inside a node.
+        /// </summary>
+        /// <remarks>
+        /// Use to add node options on nodes. Node options appear under the node header and in the inspector when a node is selected. They are appropriate for parameters that affect how a node behaves or changes its topology,
+        /// such as modifying the number of ports.
+        /// </remarks>
+        public interface IOptionDefinitionContext
+        {
+            /// <summary>
+            /// Adds a new node option.
+            /// </summary>
+            /// <param name="name">The unique identifier of the option.</param>
+            /// <param name="dataType">The data type of the option.</param>
+            /// <returns>An <see cref="IOptionBuilder"/> to further configure the option.</returns>
+            /// <remarks>
+            /// <c>name</c> is used to identify the option. It must be unique among ports and options on the node. This name is used as the ID when calling <see cref="GetNodeOptionByName(string)"/>.
+            /// If <see cref="IOptionBuilder.WithDisplayName(string)"/> is not used, this name is also used as the option's display label.
+            /// </remarks>
+            /// <example>
+            /// <code>
+            /// protected override void OnDefineOptions(IOptionDefinitionContext context)
+            /// {
+            ///     context.AddOption("MyOption", typeof(int)))
+            ///         .WithDefaultValue(2)
+            ///         .Delayed()
+            /// }
+            /// </code>
+            /// </example>
+            IOptionBuilder AddOption(string name, Type dataType);
+
+            /// <summary>
+            /// Adds a new node option.
+            /// </summary>
+            /// <typeparam name="TData">The data type of the option.</typeparam>
+            /// <param name="name">The unique identifier of the option.</param>
+            /// <returns>An <see cref="IOptionBuilder"/> to further configure the option.</returns>
+            /// <remarks>
+            /// <c>name</c> is used to identify the option. It must be unique among ports and options on the node. This name is used as the ID when calling <see cref="GetNodeOptionByName(string)"/>.
+            /// If <see cref="IOptionBuilder{TData}.WithDisplayName(string)"/> is not used, this name is also used as the option's display label.
+            /// </remarks>
+            /// <example>
+            /// <code>
+            /// protected override void OnDefineOptions(IOptionDefinitionContext context)
+            /// {
+            ///     context.AddOption&lt;int&gt;("MyOption")
+            ///         .WithDefaultValue(2)
+            ///         .Delayed()
+            /// }
+            /// </code>
+            /// </example>
+            IOptionBuilder<TData> AddOption<TData>(string name);
+        }
+
         /// <summary>
         /// Interface that provides methods to define input and output ports during <see cref="Node.OnDefinePorts"/> execution.
         /// </summary>
@@ -186,11 +239,11 @@ namespace Unity.GraphToolkit.Editor
         /// </summary>
         /// <param name="context">Provides methods for defining node options.</param>
         /// <remarks>
-        /// This method is called before <see cref="OnDefinePorts"/>. Override this method to add node options using the provided <see cref="INodeOptionDefinition"/>.
+        /// This method is called before <see cref="OnDefinePorts"/>. Override this method to add node options using the provided <see cref="IOptionDefinitionContext"/>.
         /// </remarks>
         /// <example>
         /// <code>
-        /// protected override void OnDefineOptions(INodeOptionDefinition context)
+        /// protected override void OnDefineOptions(IOptionDefinitionContext context)
         /// {
         ///     context.AddNodeOption&lt;bool&gt;(
         ///         optionName: "My Bool",
@@ -205,7 +258,7 @@ namespace Unity.GraphToolkit.Editor
         /// }
         /// </code>
         /// </example>
-        protected virtual void OnDefineOptions(INodeOptionDefinition context) {}
+        protected virtual void OnDefineOptions(IOptionDefinitionContext context) {}
 
         /// <summary>
         /// Called during <see cref="DefineNode"/> to define the input and output ports of the node.

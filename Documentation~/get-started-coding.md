@@ -70,7 +70,7 @@ Here's your final script:
 
 [!code-csharp[](../Samples/DocCodeSamples/Editor/SimpleExamples.cs)]
 
-And some recommendations for next steps:
+## Additional resources
 
-* Check out the [Graph Toolkit samples](samples.md) to learn more advanced features and implementations.
-* Explore the [Graph Toolkit user manual](index.md) and [Graph Toolkit API documentation](https://docs.unity3d.com/Packages/com.unity.graph-toolkit@latest/api/index.html) to learn more about the available classes and methods.
+* [Graph Toolkit samples](samples.md) 
+* [Graph Toolkit API documentation](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@latest/index.html?subfolder=/api/index.html) 

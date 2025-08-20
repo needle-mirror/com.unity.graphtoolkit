@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 namespace Unity.GraphToolkit.InternalBridge
 {
     // *** Only used in tests ***
+    [Obsolete]  // TODO: fix this class to not use the obsolete Panel.TimeSinceStartup GTF-2219
     class TimerEventSchedulerWrapperForTests : IDisposable
     {
         readonly VisualElement m_VisualElement;

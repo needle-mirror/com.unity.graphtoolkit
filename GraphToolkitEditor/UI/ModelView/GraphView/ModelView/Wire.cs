@@ -288,7 +288,7 @@ namespace Unity.GraphToolkit.Editor
                 if (wires.Count > 0)
                 {
                     var wireData = GetPortalsWireData(wires, GraphView);
-                    evt.menu.AppendAction("Add Portals", _ =>
+                    evt.menu.AppendMenuItemFromShortcutWithName<ShortcutConvertWireToPortalEvent>(GraphView.GraphTool, "Add Portals", _ =>
                     {
                         GraphView.Dispatch(new ConvertWiresToPortalsCommand(wireData, GraphView));
                     });

@@ -209,7 +209,7 @@ namespace Unity.GraphToolkit.Editor
 
             Dictionary<Type, List<object>> m_TypedPortBuilderPools = new ();
 
-            List<PortBuilder> m_UsedPortBuilder = new List<PortBuilder>();
+            List<PortBuilder> m_UsedPortBuilder = new();
 
             PortBuilder GetFreeBuilder()
             {
@@ -287,7 +287,219 @@ namespace Unity.GraphToolkit.Editor
             }
         }
 
-        static PortDefinitionContext s_PortDefinitionContext = new ();
+        internal class OptionDefinitionContext : IOptionDefinitionContext
+        {
+            class OptionBuilder : IOptionBuilder
+            {
+                OptionDefinitionContext m_OptionsDefinitionContext;
+
+                string m_OptionName;
+                string m_DisplayName;
+                string m_Tooltip;
+                int m_Order;
+                List<Attribute> m_Attributes = new ();
+                bool m_ShowInInspectorOnly;
+                object m_DefaultValue;
+
+                internal Type OptionType;
+                internal object TypedBuilder;
+
+                internal void Reset()
+                {
+                    m_OptionName = null;
+                    m_DisplayName = null;
+                    m_Tooltip = null;
+                    m_Order = 0;
+                    m_Attributes.Clear();
+                    OptionType = null;
+                    m_DefaultValue = null;
+                    TypedBuilder = null;
+                }
+
+                internal IOptionBuilder AddOption(OptionDefinitionContext optionsDefinition, string optionName, Type dataType)
+                {
+                    m_OptionsDefinitionContext = optionsDefinition;
+                    m_OptionName = optionName;
+                    OptionType = dataType;
+                    return this;
+                }
+
+                public IOptionBuilder WithDisplayName(string displayName)
+                {
+                    this.m_DisplayName = displayName;
+                    return this;
+                }
+
+                public IOptionBuilder WithTooltip(string tooltip)
+                {
+                    this.m_Tooltip = tooltip;
+                    return this;
+                }
+
+                public IOptionBuilder WithDefaultValue(object defaultValue)
+                {
+                    if (defaultValue != null && !OptionType.IsInstanceOfType(defaultValue))
+                    {
+                        throw new ArgumentException($"Default value type {defaultValue} is not assignable to option type {OptionType}");
+                    }
+                    this.m_DefaultValue = defaultValue;
+                    return this;
+                }
+
+                public IOptionBuilder Delayed()
+                {
+                    if (!m_Attributes.Any(t => t is DelayedAttribute))
+                        m_Attributes.Add(new DelayedAttribute());
+                    return this;
+                }
+
+                public IOptionBuilder ShowInInspectorOnly()
+                {
+                    m_ShowInInspectorOnly = true;
+                    return this;
+                }
+
+                public INodeOption Build()
+                {
+                    var attributesArray = m_Attributes.Count > 0 ? m_Attributes.ToArray() : null;
+                    var result = m_OptionsDefinitionContext.OptionsDefinition.AddNodeOption(m_OptionName, OptionType,
+                        m_DisplayName, m_Tooltip, m_ShowInInspectorOnly, m_Order, attributesArray, m_DefaultValue);
+                    m_OptionsDefinitionContext.ReleaseBuilder(this);
+
+                    return result;
+                }
+            }
+
+            class OptionBuilder<TData> : IOptionBuilder<TData>
+            {
+                public OptionBuilder parent;
+
+                internal void Reset() => parent.Reset();
+
+                internal IOptionBuilder<TData> AddOption(OptionDefinitionContext optionsDefinition, string optionName)
+                {
+                    parent.AddOption(optionsDefinition, optionName, typeof(TData));
+                    return this;
+                }
+
+                public IOptionBuilder<TData> WithDisplayName(string displayName)
+                {
+                    parent.WithDisplayName(displayName);
+                    return this;
+                }
+
+                public IOptionBuilder<TData> WithTooltip(string tooltip)
+                {
+                    parent.WithTooltip(tooltip);
+                    return this;
+                }
+
+                public IOptionBuilder<TData> WithDefaultValue(TData defaultValue)
+                {
+                    parent.WithDefaultValue(defaultValue);
+                    return this;
+                }
+
+                public IOptionBuilder<TData> Delayed()
+                {
+                    parent.Delayed();
+                    return this;
+                }
+
+                public IOptionBuilder<TData> ShowInInspectorOnly()
+                {
+                    parent.ShowInInspectorOnly();
+                    return this;
+                }
+
+                public INodeOption Build() => parent.Build();
+            }
+
+            public IOptionsDefinition OptionsDefinition;
+
+            List<OptionBuilder> m_Pool = new();
+            List<OptionBuilder> m_Used = new();
+            Dictionary<Type, List<object>> m_TypedBuilderPools = new();
+
+            OptionBuilder GetFreeBuilder()
+            {
+                OptionBuilder builder;
+                if (m_Pool.Count > 0)
+                {
+                    builder = m_Pool[^1];
+                    m_Pool.RemoveAt(m_Pool.Count - 1);
+                }
+                else
+                {
+                    builder = new OptionBuilder(); //TODO : pool
+                }
+                m_Used.Add(builder);
+                return builder;
+            }
+
+            void ReleaseBuilder(OptionBuilder builder)
+            {
+                if (builder == null)
+                    return;
+
+                if (builder.TypedBuilder != null)
+                {
+                    ReleaseTypedBuilder(builder.OptionType, builder.TypedBuilder);
+                }
+
+                if (m_Used.Remove(builder))
+                {
+                    m_Pool.Add(builder);
+                    builder.Reset();
+                }
+            }
+
+            OptionBuilder<T> GetFreeTypedBuilder<T>(OptionBuilder parent)
+            {
+                OptionBuilder<T> result;
+                if (!m_TypedBuilderPools.TryGetValue(typeof(T), out var builderPool) || builderPool.Count == 0)
+                {
+                    builderPool = new List<object>();
+                    m_TypedBuilderPools[typeof(T)] = builderPool;
+
+                    result = new OptionBuilder<T>();
+                }
+                else
+                {
+                    result = (OptionBuilder<T>)builderPool[^1];
+                    builderPool.RemoveAt(builderPool.Count - 1);
+                }
+                parent.TypedBuilder = result;
+                result.parent = parent;
+                return result;
+            }
+
+            void ReleaseTypedBuilder(Type type, object typedBuilder)
+            {
+                m_TypedBuilderPools[type].Add(typedBuilder);
+            }
+
+            public IOptionBuilder AddOption(string name, Type dataType)
+            {
+                return GetFreeBuilder().AddOption(this, name, dataType);
+            }
+
+            public IOptionBuilder<T> AddOption<T>(string name)
+            {
+                return GetFreeTypedBuilder<T>(GetFreeBuilder()).AddOption(this, name);
+            }
+
+            public void Finish()
+            {
+                while (m_Used.Count > 0)
+                {
+                    m_Used[0].Build();
+                }
+            }
+        }
+
+        static PortDefinitionContext s_PortDefinitionContext = new();
+        static OptionDefinitionContext s_OptionDefinitionContext = new();
 
         internal void CallOnDefineNode(IPortsDefinition context)
         {
@@ -296,9 +508,11 @@ namespace Unity.GraphToolkit.Editor
             s_PortDefinitionContext.Finish();
         }
 
-        internal void CallOnDefineOptions(INodeOptionDefinition context)
+        internal void CallOnDefineOptions(IOptionsDefinition context)
         {
-            OnDefineOptions(context);
+            s_OptionDefinitionContext.OptionsDefinition = context;
+            OnDefineOptions(s_OptionDefinitionContext);
+            s_OptionDefinitionContext.Finish();
         }
 
         internal void SetImplementation(AbstractNodeModel implementation)

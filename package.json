@@ -1,7 +1,7 @@
 {
   "name": "com.unity.graphtoolkit",
   "displayName": "Graph Toolkit",
-  "version": "0.2.0-exp.1",
+  "version": "0.3.0-exp.1",
   "unity": "6000.2",
   "unityRelease": "0a9",
   "description": "The Graph Toolkit package provides a comprehensive set of APIs that developers can use to create graph editing tools. This framework allows you to create tailored, node-based workflows. It handles the foundational basics so you can spend less time on setup and more time building graph solutions.\n\nBy default any graph tools built with this package conform to Unity UI and UX standards, ensuring consistency and quality. However, there is also lots of room for customization to fit the needs of unique projects.",
@@ -9,19 +9,19 @@
     "com.unity.modules.uielements": "1.0.0"
   },
   "relatedPackages": {
-    "com.unity.graphtoolkit.tests": "0.2.0-exp.1"
+    "com.unity.graphtoolkit.tests": "0.3.0-exp.1"
   },
   "_upm": {
-    "changelog": "### Added\n* Set default shortcut to Create Sticky Note: `` Alt + ` ``.\n* Set default shortcut for converting Variable node to Constant node (and vice-versa): `Ctrl + Shift + T`.\n\n### Changed\n* [Breaking] Inverted logic for `GraphOptions.AutoIncludeNodesFromGraphAssembly` (used as [Flags]). It's now `GraphOptions.DisableAutoInclusionOfNodesFromGraphAssembly` with the default value set to false instead of true. This prevents unintentionally clearing the flag when setting other flags, as it no longer defaults to 1. Update existing usages to explicitly include this flag if needed.\n* Importing samples will now check for any missing package dependencies and prompt the user to install them if necessary.\n* Reduced padding around visual elements in the Blackboard.\n\n### Fixed\n* Fixed the documentation page `Implement node options` where two parameters within `OnDefinePorts()` in one of the code snippets were inverted: `\"Port Count\"` and `k_PortCountName`.\n* Fixed an issue where tab navigation did not work correctly within ContextNodes. Focus now moves sequentially through all visible fields.\n* Fixed a visual artifact that appeared when hovering over a Sticky Note with an empty title.\n* Fixed missing shortcut indicators for some actions in the Canvas context menu.\n* Fixed variable names and colors not displaying correctly on variable instances when reloading the window (applies to Unity 6000.2.0b12 and later).\n* Fixed missing visual cue (disc inside the circle) on ports when hovered by the cursor (applies to Unity 6000.2.0b12 and later).\n* Fixed a UI issue with option-less and port-less nodes would be shrunk and not display its title (applies to Unity 6000.2.0b12 and later).\n\n### Removed\n* Removed the Tooltip field from the Variable quick access settings in the Blackboard panel."
+    "changelog": "### Added\n\n* Added a shortcut to collapse or expand the selected nodes. Default value: `Ctrl/Cmd + Shift + O`.\n* Added a shortcut Extract Contents To Placemat that applies on the selected subgraph. Default value: `Ctrl/Cmd + Shift + U`.\n* Added a shortcut to convert the selected wires to portals. Default value: `Ctrl + Shift + P`.\n* Added a default shortcut for toggling the Blackboard overlay on and off: B.\n* Added a default shortcut for toggling the Graph Inspector overlay on and off: `I`.\n* Added a default shortcut for toggling the Minimap overlay on and off: `M`.\n* Added a shortcut to delete all wires on a node. Default value: `Ctrl/Cmd + Shift + W`.\n\n### Changed\n\n* Minor tweaks to the layout of the graph inspector\n* Node Options are now defined via a builder, similar to ports.\n* Node outputs no longer have a dark background around them\n\n### Fixed\n\n* Fixed issue where port fields would not be updated if the port data type changed\n* MacOS: Shortcut `Convert Variable and Constant` is set to `Cmd + Shift + T`.\n* After creating a read or write graph variable in a subgraph the parent graph's subgraph node's ports will immediately be updated.\n* Removed border between inputs and outputs on context nodes\n* Fixed some layout issues in context nodes\n* In a Graph with two context types, the item library now show the correct block list for each context type.\n\n### Removed\n\n* Node Options can no longer include any attribute. Supported attributes are defined as builder methods (ex: `Delayed()`).\n* Node Options no longer have a parameter for `order`, their order is defined by the order they're defined in.\n* Additional CSS margin specific to 'execution flow' port labels. We no longer impose semantics (like 'execution flow') on ports."
   },
   "upmCi": {
-    "footprint": "f144712e9052a0916b27fd4cdad6ca646658696c"
+    "footprint": "248c629f9ccb4ab33a6577088e5de1e535c68590"
   },
-  "documentationUrl": "https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.2/manual/index.html",
+  "documentationUrl": "https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.3/manual/index.html",
   "repository": {
     "url": "https://github.cds.internal.unity3d.com/unity/com.unity.motion.git",
     "type": "git",
-    "revision": "2b68f7f49eba0ea19f19f9461dc6abcef10835b0"
+    "revision": "672049ef668ec980e6d8488bc46181cd7076c4de"
   },
   "samples": [
     {

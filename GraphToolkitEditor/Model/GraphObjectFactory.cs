@@ -237,7 +237,7 @@ namespace Unity.GraphToolkit.Editor
 
         static string InstanceIdToFileExtension(InstanceID instanceId)
         {
-            var filePath = AssetDatabase.GetAssetPath(instanceId);
+            var filePath = AssetDatabase.GetAssetPath((EntityId)instanceId);
             if (!string.IsNullOrEmpty(filePath))
             {
                 var extension = Path.GetExtension(filePath);
@@ -250,9 +250,13 @@ namespace Unity.GraphToolkit.Editor
 
         static GraphObject TryLoadGraphObjectFromInstanceId(InstanceID instanceId)
         {
-            if (AssetDatabase.IsNativeAsset(instanceId))
+            if (AssetDatabase.IsNativeAsset((EntityId)instanceId))
             {
+#if UNITY_6000_3_OR_NEWER
+                return EditorUtility.EntityIdToObject((EntityId)instanceId) as GraphObject;
+#else
                 return EditorUtility.InstanceIDToObject(instanceId) as GraphObject;
+#endif
             }
 
             var extension = InstanceIdToFileExtension(instanceId);
@@ -260,7 +264,7 @@ namespace Unity.GraphToolkit.Editor
                 return null;
             if (s_GraphObjectInfosByExtension.TryGetValue(extension, out var graphObjectInfos) && graphObjectInfos.loaderFunction != null)
             {
-                var filePath = AssetDatabase.GetAssetPath(instanceId);
+                var filePath = AssetDatabase.GetAssetPath((EntityId)instanceId);
                 return LoadGraphObjectAtPath(graphObjectInfos.loaderFunction, filePath, false);
             }
 

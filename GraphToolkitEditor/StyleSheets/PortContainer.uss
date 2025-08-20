@@ -31,6 +31,11 @@
     padding-right: 4px;
 }
 
+.ge-context-node .ge-node__inputs,
+.ge-context-node .ge-port-hierarchy-container__container {
+    border-right-width: 0;
+}
+
 .ge-node__outputs .ge-port-connector-part__output-spacer {
     flex-grow: 1;
     flex-shrink: 0;
@@ -39,7 +44,6 @@
 .ge-node__outputs,
 .ge-node__outputs .ge-port-hierarchy-container__container {
     align-items: stretch; /* Ports should take all the available horizontal space. */
-    background-color: var(--graph-color-node-output-background);
     padding-left: 3px;
 }
 

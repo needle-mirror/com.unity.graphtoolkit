@@ -52,6 +52,7 @@ namespace Unity.GraphToolkit.Editor.Implementation
             }
             var graphWindow = EditorWindow.CreateWindow<GraphViewEditorWindowImp>(typeof(GraphViewEditorWindowImp), typeof(GraphViewEditorWindow), typeof(SceneView));
             graphWindow.GraphTool.Dispatch(new LoadGraphCommand(graphObject.GraphModel));
+            graphWindow.UpdateTooltips();
         }
 
         protected override void OnEnable()

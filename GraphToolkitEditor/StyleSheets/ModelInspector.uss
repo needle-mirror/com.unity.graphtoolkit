@@ -33,8 +33,6 @@
 }
 
 .ge-model-property-field {
-    padding-top: 4px;
-    padding-bottom: 4px;
 }
 
 .ge-model-property-field--multiline .unity-text-field {

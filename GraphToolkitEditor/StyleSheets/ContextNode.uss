@@ -133,7 +133,7 @@
 }
 
 .ge-context-node > .ge-in-out-port-container-part {
-    padding-right: 4px;
+    padding-right: 8px;
 }
 .ge-context-node > .ge-in-out-port-container-part {
     background-color: transparent;
@@ -152,7 +152,7 @@
 
 .ge-context-node.ge-node > .ge-node__port-container > .ge-node__outputs {
     background-color: var(--graph-color-node-background);
-    padding-right: 12px;
+    padding-right: 9px;
 }
 
 .ge-context-node.ge-node > .ge-in-out-port-container-part--no-input > .ge-node__outputs {

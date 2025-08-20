@@ -43,6 +43,36 @@ namespace Unity.GraphToolkit.Editor
     }
 
     /// <summary>
+    /// An event sent by the Toggle Blackboard shortcut
+    /// </summary>
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutToggleBlackboardEvent : ShortcutEventBase<ShortcutToggleBlackboardEvent>
+    {
+        public const string id = "Toggle Blackboard";
+        const KeyCode k_KeyCode = KeyCode.B;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.None;
+    }
+
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutToggleInspectorEvent : ShortcutEventBase<ShortcutToggleInspectorEvent>
+    {
+        public const string id = "Toggle Inspector";
+        const KeyCode k_KeyCode = KeyCode.I;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.None;
+    }
+
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutToggleMinimapEvent : ShortcutEventBase<ShortcutToggleMinimapEvent>
+    {
+        public const string id = "Toggle Minimap";
+        const KeyCode k_KeyCode = KeyCode.M;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.None;
+    }
+
+    /// <summary>
     /// An event sent by the Convert Variable And Constant shortcut.
     /// </summary>
     [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
@@ -51,7 +81,19 @@ namespace Unity.GraphToolkit.Editor
     {
         public const string id = "Convert Variable And Constant";
         const KeyCode k_KeyCode = KeyCode.T;
-        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Control | ShortcutModifiers.Shift;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Action | ShortcutModifiers.Shift;
+    }
+
+    /// <summary>
+    /// An event sent by the Convert Wire To Portal shortcut.
+    /// </summary>
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutConvertWireToPortalEvent : ShortcutEventBase<ShortcutConvertWireToPortalEvent>
+    {
+        public const string id = "Convert Wire To Portal";
+        const KeyCode k_KeyCode = KeyCode.P;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Action | ShortcutModifiers.Shift;
     }
 
     /* TODO OYT (GTF-804): For V1, access to the Align Items and Align Hierarchy features was removed as they are confusing to users. To be improved before making them accessible again.
@@ -123,5 +165,41 @@ namespace Unity.GraphToolkit.Editor
         public const string id = "Duplicate Without Wires";
         const KeyCode k_KeyCode = KeyCode.D;
         const ShortcutModifiers k_Modifiers = ShortcutModifiers.Shift | ShortcutModifiers.Action;
+    }
+
+    /// <summary>
+    /// An event sent by the Disconnect Wires shortcut.
+    /// </summary>
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutDisconnectWiresEvent : ShortcutEventBase<ShortcutDisconnectWiresEvent>
+    {
+        public const string id = "Disconnect Wires";
+        const KeyCode k_KeyCode = KeyCode.W;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Action | ShortcutModifiers.Shift;
+    }
+
+    /// <summary>
+    /// An event sent by the Toggle Node Collapse shortcut.
+    /// </summary>
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutToggleNodeCollapseEvent : ShortcutEventBase<ShortcutToggleNodeCollapseEvent>
+    {
+        public const string id = "Toggle Node Collapse";
+        const KeyCode k_KeyCode = KeyCode.O;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Action | ShortcutModifiers.Shift;
+    }
+
+    /// <summary>
+    /// An event sent by the Expand Subgraph shortcut.
+    /// </summary>
+    [ToolShortcutEvent(null, id, k_KeyCode, k_Modifiers)]
+    [UnityRestricted]
+    internal class ShortcutExtractContentsToPlacematEvent : ShortcutEventBase<ShortcutExtractContentsToPlacematEvent>
+    {
+        public const string id = "Extract Contents to Placemat";
+        const KeyCode k_KeyCode = KeyCode.U;
+        const ShortcutModifiers k_Modifiers = ShortcutModifiers.Action | ShortcutModifiers.Shift;
     }
 }

@@ -18,7 +18,7 @@ namespace Unity.GraphToolkit.Editor
         /// Scope for defining the node in the <see cref="NodeModel.OnDefineNode"/> method. Provides methods to instantiate ports to the node.
         /// </summary>
         [UnityRestricted]
-        internal class NodeDefinitionScope: IPortsDefinition, INodeOptionDefinition
+        internal class NodeDefinitionScope: IPortsDefinition, IOptionsDefinition
         {
             protected readonly NodeModel m_NodeModel;
 
@@ -213,12 +213,13 @@ namespace Unity.GraphToolkit.Editor
                 return AddOutputPort(portName, dataType?.GenerateTypeHandle() ?? TypeHandle.ExecutionFlow, null, portId, orientation, PortModelOptions.Default, attributes);
             }
 
-            void INodeOptionDefinition.AddNodeOption(string optionName, Type dataType, string optionDisplayName, string tooltip, bool showInInspectorOnly, int order, Attribute[] attributes, object defaultValue)
+            public INodeOption AddNodeOption(string optionName, Type dataType, string optionDisplayName = null, string tooltip = null,
+                bool showInInspectorOnly = false, int order = 0, Attribute[] attributes = null, object defaultValue = null)
             {
                 Action<Constant> initializationCallback = null;
                 if (defaultValue != null)
                     initializationCallback = c => c.ObjectValue = defaultValue;
-                AddNodeOption(optionDisplayName ?? optionName, dataType.GenerateTypeHandle(), optionDisplayName != null ? optionName : null, tooltip, showInInspectorOnly, order, attributes, initializationCallback, _ =>
+                return AddNodeOption(optionDisplayName ?? optionName, dataType.GenerateTypeHandle(), optionDisplayName != null ? optionName : null, tooltip, showInInspectorOnly, order, attributes, initializationCallback, _ =>
                 {
                     if (!m_NodeModel.m_InDefineNode)
                         m_NodeModel.DefineNode();
@@ -1251,21 +1252,21 @@ namespace Unity.GraphToolkit.Editor
             if ((inputPort.Options & PortModelOptions.NoEmbeddedConstant) != 0)
             {
                 m_InputConstantsById.Remove(id);
-                GraphModel.CurrentGraphChangeDescription.AddChangedModel(this, ChangeHint.Unspecified);
+                GraphModel?.CurrentGraphChangeDescription.AddChangedModel(this, ChangeHint.Unspecified);
                 return;
             }
 
             Constant newConstant = null;
             if (m_InputConstantsById.TryGetValue(id, out var existingConstant))
             {
-                newConstant = GraphModel.CreateConstantValue(inputPort.DataTypeHandle);
+                newConstant = GraphModel?.CreateConstantValue(inputPort.DataTypeHandle);
                 var portDefinitionType = newConstant != null ? newConstant.Type : inputPort.DataTypeHandle.Resolve();
 
                 if (!existingConstant.IsAssignableFrom(portDefinitionType))
                 {
                     // Destroy incompatible constant
                     m_InputConstantsById.Remove(id);
-                    GraphModel.CurrentGraphChangeDescription.AddChangedModel(this, ChangeHint.Unspecified);
+                    GraphModel?.CurrentGraphChangeDescription.AddChangedModel(this, ChangeHint.Unspecified);
                 }
                 else
                 {
@@ -1280,7 +1281,7 @@ namespace Unity.GraphToolkit.Editor
             if (inputPort.CreateEmbeddedValueIfNeeded
                 && inputPort.DataTypeHandle != TypeHandle.Unknown)
             {
-                newConstant ??= GraphModel.CreateConstantValue(inputPort.DataTypeHandle);
+                newConstant ??= GraphModel?.CreateConstantValue(inputPort.DataTypeHandle);
                 if (newConstant != null)
                 {
                     newConstant.OwnerModel = inputPort;

@@ -90,6 +90,8 @@
 .ge-port__constant-editor {
     flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .ge-port__constant-editor .unity-property-field {
@@ -201,10 +203,6 @@
 
 .ge-port--data-type-execution-flow .ge-port__icon {
     display: none;
-}
-
-.ge-port--data-type-execution-flow .ge-port-connector-part__label {
-    margin-left: 10px;
 }
 
 .ge-node__outputs .ge-port-connector-part__connector {

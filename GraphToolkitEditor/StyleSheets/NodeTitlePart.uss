@@ -56,7 +56,6 @@
 }
 
 .ge-node-title-part .ge-node-title-part__button-container {
-    background-color: var(--graph-color-node-background);
     flex-direction: row;
     position: absolute;
     align-items: center;

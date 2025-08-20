@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.ShortcutManagement;
 using UnityEngine;
+using UnityEngine.Pool;
 using InstanceID = System.Int32;
 
 namespace Unity.GraphToolkit.Editor.Implementation
@@ -234,6 +235,9 @@ namespace Unity.GraphToolkit.Editor.Implementation
             {
                 graphInfos.blockTypes = new Dictionary<Type, List<Type>>();
 
+                var dispose = HashSetPool<Type>.Get(out var nodeTypes);
+                nodeTypes.UnionWith(GetNodeTypes(graphType));
+
                 var blockTypes = TypeCache.GetTypesWithAttribute<UseWithContextAttribute>();
 
                 foreach (var blockType in blockTypes)
@@ -245,10 +249,8 @@ namespace Unity.GraphToolkit.Editor.Implementation
                         continue;
                     if (nodeAttribute != null && !nodeAttribute.IsGraphTypeSupported(graphType))
                         continue;
-                    if( !blockNodeAttribute.IsContextTypeSupported(contextType))
-                        continue;
 
-                    AddBlockType(blockNodeAttribute, blockType);
+                    AddBlockType(nodeTypes, blockNodeAttribute, blockType);
 
                     var subBlockTypes = TypeCache.GetTypesDerivedFrom(blockType);
                     foreach (var subBlockType in subBlockTypes)
@@ -256,23 +258,26 @@ namespace Unity.GraphToolkit.Editor.Implementation
                         var subAttribute = GetSpecificAttribute<UseWithContextAttribute>(subBlockType, blockType);
                         if( subAttribute != null) // if it has its own BlockNodeAttribute, it will be handled in the loop above
                             continue;
-                        AddBlockType(blockNodeAttribute, subBlockType);
+                        AddBlockType(nodeTypes, blockNodeAttribute, subBlockType);
                     }
                 }
             }
 
             return (IReadOnlyList<Type>)graphInfos.blockTypes.GetValueOrDefault(contextType) ?? Array.Empty<Type>();
 
-            void AddBlockType(UseWithContextAttribute blockNodeAttribute, Type blockType)
+            void AddBlockType(HashSet<Type> nodeTypes, UseWithContextAttribute blockNodeAttribute, Type blockType)
             {
                 if (blockType.IsAbstract)
                     return;
                 foreach (var cType in blockNodeAttribute.contextTypes)
                 {
+                    if (!nodeTypes.Contains(cType)) // If the context type does not support the graph type, we don't add the block type to the list.
+                        continue;
+
                     if( ! graphInfos.blockTypes.TryGetValue(cType, out var blockList))
                     {
                         blockList = new List<Type>();
-                        graphInfos.blockTypes[contextType] = blockList;
+                        graphInfos.blockTypes[cType] = blockList;
                     }
                     blockList.Add(blockType);
                 }
@@ -344,7 +349,7 @@ namespace Unity.GraphToolkit.Editor.Implementation
         [OnOpenAsset(999)]
         public static bool OpenGraphAsset(InstanceID instanceId, int line)
         {
-            var path = AssetDatabase.GetAssetPath(instanceId);
+            var path = AssetDatabase.GetAssetPath((EntityId)instanceId);
 
             if( string.IsNullOrEmpty(path) )
                 return false;
@@ -416,7 +421,7 @@ namespace Unity.GraphToolkit.Editor.Implementation
                     return attribute;
                 type = type.BaseType;
 
-                if (type?.GetGenericTypeDefinition() == baseType)
+                if (type?.IsGenericType == true && type.GetGenericTypeDefinition() == baseType)
                     return null;
             }
 

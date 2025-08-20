@@ -416,11 +416,15 @@ namespace Unity.GraphToolkit.Editor
                 RegisterCallback<ShortcutFrameOriginEvent>(OnShortcutFrameOriginEvent);
                 RegisterCallback<ShortcutShowItemLibraryEvent>(OnShortcutShowItemLibraryEvent);
                 RegisterCallback<ShortcutConvertConstantAndVariableEvent>(OnShortcutConvertVariableAndConstantEvent);
+                RegisterCallback<ShortcutConvertWireToPortalEvent>(OnShortcutConvertWireToPortalEvent);
                 // TODO OYT (GTF-804): For V1, access to the Align Items and Align Hierarchy features was removed as they are confusing to users. To be improved before making them accessible again.
                 // RegisterCallback<ShortcutAlignNodesEvent>(OnShortcutAlignNodesEvent);
                 // RegisterCallback<ShortcutAlignNodeHierarchiesEvent>(OnShortcutAlignNodeHierarchyEvent);
                 RegisterCallback<ShortcutCreateStickyNoteEvent>(OnShortcutCreateStickyNoteEvent);
                 RegisterCallback<ShortcutCreatePlacematEvent>(OnShortcutCreatePlacematEvent);
+                RegisterCallback<ShortcutDisconnectWiresEvent>(OnShortcutDisconnectWiresEvent);
+                RegisterCallback<ShortcutToggleNodeCollapseEvent>(OnShortcutToggleNodeCollapseEvent);
+                RegisterCallback<ShortcutExtractContentsToPlacematEvent>(OnShortcutExtractContentsToPlacematEvent);
                 RegisterCallback<KeyDownEvent>(OnRenameKeyDown);
             }
             else
@@ -870,7 +874,7 @@ namespace Unity.GraphToolkit.Editor
             var selection = GetSelection().ToList();
             if (GraphModel.AllowSubgraphCreation && selection.Count == 1 && selection[0] is SubgraphNodeModel {CanBeExpanded: true} subgraphNodeModel)
             {
-                evt.menu.InsertAction(0, "Expand Subgraph", menuAction =>
+                evt.menu.AppendMenuItemFromShortcut<ShortcutExtractContentsToPlacematEvent>(GraphTool, menuAction =>
                 {
                     Dispatch(new ExpandSubgraphCommand(GraphModel, subgraphNodeModel, ContentViewContainer.WorldToLocal(menuAction?.eventInfo?.mousePosition ?? Event.current.mousePosition)));
                 }, subgraphNodeModel.GetSubgraphModel() is null ? DropdownMenuAction.Status.Disabled : DropdownMenuAction.Status.Normal);
@@ -963,7 +967,7 @@ namespace Unity.GraphToolkit.Editor
                             .Where(m => m.GetConnectedWires().Any())
                             .ToList();
 
-                        evt.menu.AppendAction("Disconnect All Wires", _ =>
+                        evt.menu.AppendMenuItemFromShortcutWithName<ShortcutDisconnectWiresEvent>(GraphTool, "Disconnect All Wires", _ =>
                         {
                             Dispatch(new DisconnectWiresCommand(connectedNodes));
                         }, connectedNodes.Count == 0 ? DropdownMenuAction.Status.Disabled : DropdownMenuAction.Status.Normal);
@@ -1108,7 +1112,7 @@ namespace Unity.GraphToolkit.Editor
                             evt.menu.AppendSeparator();
 
                             var wireData = Wire.GetPortalsWireData(wires, this);
-                            evt.menu.AppendAction("Add Portals", _ =>
+                            evt.menu.AppendMenuItemFromShortcutWithName<ShortcutConvertWireToPortalEvent>(GraphTool, "Add Portals", _ =>
                             {
                                 Dispatch(new ConvertWiresToPortalsCommand(wireData, this));
                             });
@@ -1833,6 +1837,35 @@ namespace Unity.GraphToolkit.Editor
             }
         }
 
+        /// <summary>
+        /// Cabllback for the ShortcutConvertWireToPortalEvent.
+        /// </summary>
+        /// <param name="e">The event.</param>
+        protected void OnShortcutConvertWireToPortalEvent(ShortcutConvertWireToPortalEvent e)
+        {
+            if (!GraphModel.AllowPortalCreation)
+                return;
+
+            var selection = GetSelection();
+            if (selection.Count == 0)
+                return;
+            using var dispose = ListPool<WireModel>.Get(out var wires);
+
+            foreach (var selectedItem in selection)
+            {
+                if (selectedItem is not WireModel wire)
+                    continue;
+                wires.Add(wire);
+            }
+
+            if (wires.Count == 0)
+                return;
+
+            var wireData = Wire.GetPortalsWireData(wires, this);
+            Dispatch(new ConvertWiresToPortalsCommand(wireData, this));
+            e.StopPropagation();
+        }
+
         /* TODO OYT (GTF-804): For V1, access to the Align Items and Align Hierarchy features was removed as they are confusing to users. To be improved before making them accessible again.
         /// <summary>
         /// Callback for the ShortcutAlignNodesEvent.
@@ -1891,6 +1924,111 @@ namespace Unity.GraphToolkit.Editor
 
                 CreatePlacematFromGraphElements(selectedGraphElements, graphPosition);
 
+                e.StopPropagation();
+            }
+        }
+
+        protected void OnShortcutExtractContentsToPlacematEvent(ShortcutExtractContentsToPlacematEvent e)
+        {
+            if (!GraphModel.AllowSubgraphCreation)
+                return;
+
+            var selection = GetSelection();
+            if (selection.Count == 1 && selection[0] is SubgraphNodeModel { CanBeExpanded: true } subgraphNodeModel)
+            {
+                Dispatch(new ExpandSubgraphCommand(GraphModel, subgraphNodeModel, subgraphNodeModel.Position));
+                e.StopPropagation();
+            }
+        }
+
+        /// <summary>
+        /// Callback for the ShortcutDisconnectWiresEvent.
+        /// </summary>
+        /// <param name="e">The event.</param>
+        protected void OnShortcutDisconnectWiresEvent(ShortcutDisconnectWiresEvent e)
+        {
+            var selection = GetSelection();
+            if (selection.Count == 0)
+                return;
+
+            using var dispose = ListPool<AbstractNodeModel>.Get(out var nodes);
+            foreach (var selectedItem in selection)
+            {
+                if (selectedItem is not AbstractNodeModel nodeModel)
+                    continue;
+
+                if (nodeModel is ContextNodeModel contextNodeModel)
+                {
+                    for (int i = 0; i < contextNodeModel.BlockCount; ++i)
+                    {
+                        var block = contextNodeModel.GetBlock(i);
+                        if (block.GetConnectedWires().Count() > 0)
+                            nodes.Add(block);
+                    }
+                }
+
+                if (nodeModel.GetConnectedWires().Count() == 0)
+                    continue;
+
+                nodes.Add(nodeModel);
+            }
+
+            if (nodes.Count == 0)
+                return;
+
+            Dispatch(new DisconnectWiresCommand(nodes));
+            e.StopPropagation();
+        }
+
+        /// Callback for the ShortcutToggleNodeCollapseEvent.
+        /// </summary>
+        /// <param name="e">The event.</param>
+        protected void OnShortcutToggleNodeCollapseEvent(ShortcutToggleNodeCollapseEvent e)
+        {
+            using var dispose = ListPool<AbstractNodeModel>.Get(out var selectedGraphElementsUncollapsed);
+            using var dispose2 = ListPool<AbstractNodeModel>.Get(out var selectedGraphElementsCollapsed);
+
+            // Gather all collapsible nodes in the selection and avoid duplicates in collections.
+            // User can select blocks and the parent contextNode at the same time.
+            void GatherCollapsibleNodes(NodeModel nodeModel)
+            {
+                if (!nodeModel.IsCollapsible())
+                    return;
+
+                if (nodeModel.Collapsed)
+                {
+                    if (!selectedGraphElementsCollapsed.Contains(nodeModel))
+                        selectedGraphElementsCollapsed.Add(nodeModel);
+                }
+                else
+                {
+                    if (!selectedGraphElementsUncollapsed.Contains(nodeModel))
+                        selectedGraphElementsUncollapsed.Add(nodeModel);
+                }
+            }
+
+            foreach (var selection in GetSelection())
+            {
+                switch (selection)
+                {
+                    case ContextNodeModel contextNode:
+                        for (int i = 0; i < contextNode.BlockCount; ++i)
+                            GatherCollapsibleNodes(contextNode.GetBlock(i));
+                        break;
+                    case NodeModel nodeModel:
+                        GatherCollapsibleNodes(nodeModel);
+                        break;
+                }
+            }
+
+            if (selectedGraphElementsUncollapsed.Count > 0)
+            {
+                Dispatch(new CollapseNodeCommand(true, selectedGraphElementsUncollapsed));
+                e.StopPropagation();
+            }
+            else if (selectedGraphElementsCollapsed.Count > 0)
+            {
+                Dispatch(new CollapseNodeCommand(false, selectedGraphElementsCollapsed));
                 e.StopPropagation();
             }
         }

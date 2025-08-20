@@ -17,6 +17,9 @@
 .ge-state--entry-point {
     --state-background-color: var(--graph-color-enter-state-background);
 }
+.ge-state--entry-point > .ge-node-progress-bar {
+    --debug-background-alpha: 0.3;
+}
 
 .ge-state > .ge-node-title-part {
     flex-grow: 1;

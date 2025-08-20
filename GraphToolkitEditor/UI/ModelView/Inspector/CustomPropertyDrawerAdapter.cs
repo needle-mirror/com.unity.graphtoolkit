@@ -257,26 +257,41 @@ namespace Unity.GraphToolkit.Editor
 
             string id;
             var ownerModel = owner;
+            PortModel ownerPort = null;
             if (ownerModel is PortModel port)
             {
                 id = port.UniqueName;
                 ownerModel = port.NodeModel;
+                ownerPort = port;
             }
             else
-                id = owner switch
+            {
+                switch (owner)
                 {
-                    ISingleInputPortNodeModel singleInputPortNodeModel => singleInputPortNodeModel.InputPort.UniqueName,
-                    ISingleOutputPortNodeModel singleOutputPortNodeModel => singleOutputPortNodeModel.OutputPort.UniqueName,
-                    _ => constant.ToString()
-                };
+                    case ISingleInputPortNodeModel singleInputPortNodeModel:
+                        id = singleInputPortNodeModel.InputPort.UniqueName;
+                        ownerPort = singleInputPortNodeModel.InputPort;
+                        break;
+                    case ISingleOutputPortNodeModel singleOutputPortNodeModel:
+                        id = singleOutputPortNodeModel.OutputPort.UniqueName;
+                        ownerPort = singleOutputPortNodeModel.OutputPort;
+                        break;
+                    default:
+                        id = constant.ToString();
+                        break;
+                }
+            }
 
             var wrappers = objectWrappers.GetOrCreateValue(ownerModel);
 
             // If a wrapper already exists for that constant, return it.
             foreach (var (wrapperId, existingWrapper) in wrappers)
             {
-                if (existingWrapper.WrappedObject is Constant && string.Equals(wrapperId, id) && existingWrapper.CommandTarget == commandTarget)
+                if (existingWrapper.WrappedObject is Constant cst && cst.Type == constant.Type && string.Equals(wrapperId, id) && existingWrapper.CommandTarget == commandTarget)
+                {
+                    existingWrapper.WrappedObject = constant; // Constant might have been recreated e.g. by changing port types back and forth.
                     return existingWrapper;
+                }
             }
 
             // Else, create a new one.
@@ -286,7 +301,7 @@ namespace Unity.GraphToolkit.Editor
             if (wrapper != null)
             {
                 wrapper.hideFlags = HideFlags.DontUnloadUnusedAsset | HideFlags.DontSave;
-                wrapper.Owner = owner;
+                wrapper.Owner = ownerPort ?? owner;
                 wrapper.CommandTarget = commandTarget;
                 wrapper.WrappedObject = constant;
                 wrapper.Value = constant.ObjectValue ?? constant.DefaultValue;

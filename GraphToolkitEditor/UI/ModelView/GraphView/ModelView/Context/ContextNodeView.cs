@@ -95,12 +95,12 @@ namespace Unity.GraphToolkit.Editor
         {
             base.BuildPartList();
 
-            PartList.InsertPartBefore(topPortContainerPartName, new ContextCategoryPart(contextTopCategoryPartName, ContextNodeModel, this, ussClassName, true));
+            PartList.InsertPartBefore(topPortContainerPartName, new CategoryPart(contextTopCategoryPartName, ContextNodeModel, this, ussClassName, true));
 
             ContextBlocksPart = CreateContextBlocksPart();
             PartList.InsertPartBefore(bottomPortContainerPartName, ContextBlocksPart);
             PartList.MovePartBefore(cachePartName, blocksPartName);
-            PartList.AppendPart(new ContextCategoryPart(contextBottomCategoryPartName, ContextNodeModel, this, ussClassName, false));
+            PartList.AppendPart(new CategoryPart(contextBottomCategoryPartName, ContextNodeModel, this, ussClassName, false));
         }
 
         /// <summary>

@@ -2646,6 +2646,9 @@ namespace Unity.GraphToolkit.Editor
 
             m_PlaceholderData[guid] = new PlaceholderData { GroupTitle = variableDeclaration.ParentGroup.Title };
 
+            if (modifierFlags != ModifierFlags.None)
+                RedefineSubgraphNodeModels();
+
             return variableDeclaration;
         }
 
@@ -4589,6 +4592,26 @@ namespace Unity.GraphToolkit.Editor
             }
         }
 
+        /// <summary>
+        /// "If this GraphModel is a subgraph, any subgraph nodes that reference it in the parent graph must redefine its ports whenever an input or output variable declaration is added."
+        /// </summary>
+        private protected virtual void RedefineSubgraphNodeModels()
+        {
+            if (ParentGraph == null)
+                return;
+
+            foreach (var node in ParentGraph.NodeModels)
+            {
+                if (node is not SubgraphNodeModel subgraphNodeModel)
+                    continue;
+
+                if (subgraphNodeModel.GetSubgraphModel() == this)
+                {
+                    ParentGraph.RecurseDefineNode(node);
+                }
+            }
+        }
+
         /// <inheritdoc />
         public virtual bool Repair()
         {
@@ -4907,6 +4930,17 @@ namespace Unity.GraphToolkit.Editor
             }
 
             return new GraphReference(graphModel);
+        }
+        public class TestAccess
+        {
+            readonly GraphModel m_SubgraphModel;
+            public TestAccess(GraphModel subgraphModel)
+            {
+                m_SubgraphModel = subgraphModel;
+            }
+
+            public void RedefineSubgraphNodeModel() => m_SubgraphModel.RedefineSubgraphNodeModels();
+            public void RecurseDefineNode(AbstractNodeModel nodeModel) => m_SubgraphModel.RecurseDefineNode(nodeModel);
         }
     }
 }

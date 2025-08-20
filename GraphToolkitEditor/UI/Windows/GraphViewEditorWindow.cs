@@ -8,6 +8,7 @@ using Unity.GraphToolkit.CSO;
 using Unity.GraphToolsAuthoringFramework.InternalEditorBridge;
 using UnityEditor;
 using UnityEditor.Overlays;
+using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Profiling;
@@ -153,6 +154,7 @@ Would you like to save these changes?
             if (graphObject != null)
             {
                 window.GraphTool.Dispatch(loadGraphCommand ?? new LoadGraphCommand(graphObject.GraphModel));
+                window.UpdateTooltips();
             }
 
             window.Focus();
@@ -470,6 +472,46 @@ Would you like to save these changes?
 
             m_BlackboardView = new BlackboardView(this, GraphTool, GraphView.TypeHandleInfos, viewModel, viewSelection);
             return m_BlackboardView;
+        }
+
+        void OnShortcutUpdated(ShortcutBindingChangedEventArgs shortcutBindingChangedEventArgs)
+        {
+            if (shortcutBindingChangedEventArgs.shortcutId.StartsWith(GraphTool.Name))
+                UpdateTooltips();
+        }
+
+        public virtual void UpdateTooltips()
+        {
+            UpdateBlackboardToggleTooltip();
+            UpdateInspectorToggleTooltip();
+            UpdateMinimapToggleTooltip();
+        }
+
+        protected void UpdateBlackboardToggleTooltip()
+        {
+            var shortcutString = ShortcutToggleBlackboardEvent.GetShortcutString(GraphTool);
+            var toggle = rootVisualElement.panel?.visualTree.Q<BlackboardPanelToggle>();
+            if (toggle == null) return;
+            var tooltip = shortcutString != null ? $"Blackboard ({shortcutString})" : "Blackboard";
+            toggle.tooltip = tooltip;
+        }
+
+        protected void UpdateInspectorToggleTooltip()
+        {
+            var shortcutString = ShortcutToggleInspectorEvent.GetShortcutString(GraphTool);
+            var toggle = rootVisualElement.panel?.visualTree.Q<InspectorPanelToggle>();
+            if (toggle == null) return;
+            var tooltip = shortcutString != null ? $"Graph Inspector ({shortcutString})" : "Graph Inspector";
+            toggle.tooltip = tooltip;
+        }
+
+        protected void UpdateMinimapToggleTooltip()
+        {
+            var shortcutString = ShortcutToggleMinimapEvent.GetShortcutString(GraphTool);
+            var toggle = rootVisualElement.panel?.visualTree.Q<MiniMapPanelToggle>();
+            if (toggle == null) return;
+            var tooltip = shortcutString != null ? $"MiniMap ({shortcutString})" : "MiniMap";
+            toggle.tooltip = tooltip;
         }
 
         /// <summary>
@@ -819,6 +861,7 @@ Would you like to save these changes?
                 EditorBridge.CallDelayed(LoadLastOpenedGraph);
             EditorApplication.update += EditorUpdate;
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+            ShortcutManager.instance.shortcutBindingChanged += OnShortcutUpdated;
 
             m_GraphProcessingPendingLabel = new Label("Graph Processing Pending") { name = "graph-processing-pending-label" };
 
@@ -845,11 +888,17 @@ Would you like to save these changes?
             {
                 rootVisualElement.panel.visualTree.RegisterCallback<ValidateCommandEvent>(OnRootValidateCommand);
                 rootVisualElement.panel.visualTree.RegisterCallback<ExecuteCommandEvent>(OnRootExecuteCommand);
+                rootVisualElement.panel.visualTree.RegisterCallback<ShortcutToggleBlackboardEvent>(OnShortcutToggleBlackboardEvent);
+                rootVisualElement.panel.visualTree.RegisterCallback<ShortcutToggleInspectorEvent>(OnShortcutToggleInspectorEvent);
+                rootVisualElement.panel.visualTree.RegisterCallback<ShortcutToggleMinimapEvent>(OnShortcutToggleMinimapEvent);
             }
             void OnDetach(DetachFromPanelEvent _)
             {
                 rootVisualElement.panel.visualTree.UnregisterCallback<ValidateCommandEvent>(OnRootValidateCommand);
                 rootVisualElement.panel.visualTree.UnregisterCallback<ExecuteCommandEvent>(OnRootExecuteCommand);
+                rootVisualElement.panel.visualTree.UnregisterCallback<ShortcutToggleBlackboardEvent>(OnShortcutToggleBlackboardEvent);
+                rootVisualElement.panel.visualTree.UnregisterCallback<ShortcutToggleInspectorEvent>(OnShortcutToggleInspectorEvent);
+                rootVisualElement.panel.visualTree.UnregisterCallback<ShortcutToggleMinimapEvent>(OnShortcutToggleMinimapEvent);
             }
 
             // on a domain reload with the window opened, the panel is already attached to the rootVisualElement
@@ -911,6 +960,54 @@ Would you like to save these changes?
             {
                 DefaultCommandView?.HandleGlobalValidateCommand(evt);
             }
+        }
+
+        /// <summary>
+        /// Callback for the <see cref="ShortcutToggleBlackboardEvent"/>.
+        /// </summary>
+        protected void OnShortcutToggleBlackboardEvent(ShortcutToggleBlackboardEvent e)
+        {
+            ToggleBlackboard();
+            e.StopPropagation();
+        }
+
+        void ToggleBlackboard()
+        {
+            // Use the blackboard panel toggle
+            if (TryGetOverlay(BlackboardOverlay.idValue, out var blackboardOverlay))
+                blackboardOverlay.displayed = !blackboardOverlay.displayed;
+        }
+
+        /// <summary>
+        /// Callback for the <see cref="ShortcutToggleInspectorEvent"/>.
+        /// </summary>
+        protected void OnShortcutToggleInspectorEvent(ShortcutToggleInspectorEvent e)
+        {
+            ToggleInspector();
+            e.StopPropagation();
+        }
+
+        void ToggleInspector()
+        {
+            // Use the inspector panel toggle
+            if (TryGetOverlay(ModelInspectorOverlay.idValue, out var inspectorOverlay))
+                inspectorOverlay.displayed = !inspectorOverlay.displayed;
+        }
+
+        /// <summary>
+        /// Callback for the <see cref="ShortcutToggleMinimapEvent"/>.
+        /// </summary>
+        protected void OnShortcutToggleMinimapEvent(ShortcutToggleMinimapEvent e)
+        {
+            ToggleMinimap();
+            e.StopPropagation();
+        }
+
+        void ToggleMinimap()
+        {
+            // Use the minimap panel toggle
+            if (TryGetOverlay(MiniMapOverlay.idValue, out var minimapOverlay))
+                minimapOverlay.displayed = !minimapOverlay.displayed;
         }
 
         internal void SaveOverlayPositions()
@@ -1015,6 +1112,7 @@ Would you like to save these changes?
 
             EditorApplication.update -= EditorUpdate;
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+            ShortcutManager.instance.shortcutBindingChanged -= OnShortcutUpdated;
 
             ConsoleWindowHelper.RemoveLogEntries(WindowID.ToString());
 
